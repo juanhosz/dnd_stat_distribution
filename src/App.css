@@ -36,3 +36,42 @@
     transform: rotate(360deg);
   }
 }
+
+.centered_parent{
+  text-align: center;
+  width: 50%;
+  margin:auto
+}
+
+.box_caracteristicas{
+  text-align:left;
+  padding: 10px;
+  display: inline-block;
+}
+
+.caracteristica{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 5px;
+  margin: 10px;
+  width: 700px;
+  border: solid black;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 10px;
+  border-width: 1px;
+}
+
+.caracteristica_input{
+  padding-left: 5px;
+  padding-right: 5px;
+  width: 50px;
+}
+.stat_name{
+  width: 50px;
+}
+
+.caracteritstica_total{
+  display: flex;
+  justify-content: space-between;
+}
