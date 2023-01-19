@@ -54,6 +54,7 @@
   width: 50%;
   margin:auto;
   background: transparent;
+  font-family:OCR A Std, monospace;
   
 }
 
@@ -89,4 +90,14 @@
 
 .table_format{
   border-spacing: 15px;
+}
+
+
+.stat_name{
+  text-align: left;
+}
+
+
+.prueba{
+  font-family: OCR A Std, monospace;
 }
