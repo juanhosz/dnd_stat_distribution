@@ -38,38 +38,6 @@
 }
 
 
-.nombre_tabla{
-  display:flex;
-  margin-left:100px;
-  width:max-content;
-  
-}
-
-
-.box_raza{
-  margin-left: 100px;
-  width:auto;
-  
-}
-
-.box_nivel{
-  margin-left: 100px;
-  width: fit-content;
-
-}
-
-.box_ability_score{
-  width: fit-content;
-  margin-left: 50px;
-
-
-}
-.box_ability_modifier{
-  margin-left: 20px;
-  display:inline;
-
-}
-
 .parent_portrait{
   width: auto;
   height: 70px;
@@ -89,24 +57,6 @@
   
 }
 
-.box_caracteristicas{
-  text-align:left;
-  padding: 10px;
-  display: inline-block;
-}
-
-.caracteristica{
-  padding-top: 10px;
-  padding-bottom: 10px;
-  padding-left: 5px;
-  margin: 10px;
-  width: 800px;
-  border: solid black;
-  display: flex;
-  justify-content: space-between;
-  border-radius: 10px;
-  border-width: 1px;
-}
 
 .caracteristica_input{
   padding-left: 5px;
@@ -135,4 +85,8 @@
   background-image: url(/src/images/canvas.png);
   width: 1000px;
 
+}
+
+.table_format{
+  border-spacing: 15px;
 }

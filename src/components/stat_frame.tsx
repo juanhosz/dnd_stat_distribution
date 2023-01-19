@@ -34,18 +34,21 @@ export const Stat_frame = () =>{
         Nivel del personaje = <input placeholder='Nivel ' onChange={e => actualizarBonusNivel(Number(e.target.value))}></input>
         
         <div> Bonus de nivel = {bonusNivel}</div>
-        <div className="box_caracteristicas">
-          <div className="nombre_tabla">
-            <div>Stat inicial</div>
-            <div className="box_raza">Bonus de raza</div>
-            <div className="box_nivel">Bonus de nivel</div>
-            <div className="box_ability_score">Ability score</div>
-            <div className="box_ability_modifier">Ability modifier</div>
-          </div>
+        <div>
+          <table className="table_format">
+            <tr>
+              <th>Stat</th>
+              <th>Inicial</th>
+              <th>Bonus de raza</th>
+              <th>Bonus de nivel</th>
+              <th>Ability Score</th>
+              <th>Ability Modifier</th>
+            </tr>
           {stats.map(stat => 
             <StatBox stat_name = {stat} setPuntosDisponibles = {setPuntosDisponibles} puntos_disponibles = {puntos_disponibles} bonus_nivel = {bonusNivel} setBonusNivel = {setbonusNivel}></StatBox>)}
+          </table>
         </div>
         
-        </div>
+      </div>
     );
 }

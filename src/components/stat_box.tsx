@@ -19,10 +19,10 @@ export const StatBox = (props: any) =>{
         let numero_final = Number(stat.target.value);
         let ptos_disponibles = Number(puntos_disponibles);
 
-
         if ( numero_final> numero && Math.abs(calcularPuntosUtilizados(numero,numero_final)) > ptos_disponibles){
             let numero_maximo = calcularNumeroMaximo(numero,numero_final)
             let ptos_utilizados = calcularPuntosUtilizados(numero,numero_maximo)
+            console.log("El score que se pondra es de:", numero_maximo)
             setPuntosDisponibles(ptos_disponibles + ptos_utilizados);
             setNumero(numero_maximo);
             return
@@ -53,8 +53,10 @@ export const StatBox = (props: any) =>{
 
     function calcularNumeroMaximo(inicial:any, final:any){
         let sumatoria = 0;
+        let numero_actual = 0;
         let ptos_disponibles = Number(puntos_disponibles)
             for (let i = inicial; i< final;i++){
+                numero_actual = i;
                 if (sumatoria == ptos_disponibles){
                     return i;
                 }
@@ -65,7 +67,7 @@ export const StatBox = (props: any) =>{
                     sumatoria++;
                 }
             }
-        return Number(sumatoria);
+        return Number(numero_actual);
     }
 
     function calcularPuntosUtilizados(inicial:any,final:any){
@@ -163,23 +165,37 @@ export const StatBox = (props: any) =>{
 
     }
 
+    function modificador_positivo(){
+        if (modificador >= 0) return true;
+        return false;
+    }
 
     return(
-        <div className="caracteristica">
-            <div className="stat_name">{stat}</div>
-            <input className="caracteristica_input" type="number" placeholder="Estadisticas iniciales" min={0} value = {numero.toString()} onChange = {e => setear_caracteristica(e)}
-            onKeyDown = {(event) => {setear_caracteristica(event)}}>
-            </input>
-            +
-            <input type="number" placeholder="Bonus de raza" min = {0} onChange = {e => setBonusRaza(Number(e.target.value))}>
-            </input>
-            +
-            <input type="number" placeholder="Bonus de nivel" min = {0} max = {bonus_nivel+ptosnivel} title = {"bonus de nivel"} value = {bonus_nivel.toString()} onChange = {e => setBonusNivelFuncion(Number(e.target.value))}> 
-            </input>
+            <tr>
+                <td className="stat_name">{stat}</td>
 
-            <div className="caracteristica_total"> = {estadistica_final}  </div>
-            <div></div>
-            <div className="box_modificador">Bonus = {modificador}</div>
-        </div>
+                <td><input className="caracteristica_input" type="number" placeholder="Estadisticas iniciales" min={0} value = {numero.toString()} onChange = {e => setear_caracteristica(e)}
+                onKeyDown = {(event) => {setear_caracteristica(event)}}>
+                </input>
+                </td>
+
+                <td>
+                <input type="number" placeholder="Bonus de raza" min = {0} onChange = {e => setBonusRaza(Number(e.target.value))}>
+                </input>
+                </td>
+
+                <td>
+                <input type="number" placeholder="Bonus de nivel" min = {0} max = {bonus_nivel+ptosnivel} title = {"bonus de nivel"} value = {bonus_nivel.toString()} onChange = {e => setBonusNivelFuncion(Number(e.target.value))}> 
+                </input>
+                </td>
+
+                <td>
+                <div className="caracteristica_total"> = {estadistica_final}  </div>
+                </td>
+
+                {modificador_positivo()&& <td className="box_modificador" style={{'color':'green'}}> + {modificador}</td>}
+                {!modificador_positivo()&& <td className="box_modificador" style={{'color':'red'}}>  {modificador}</td>}
+                
+            </tr>
     );
 }
