@@ -7,6 +7,7 @@ export const StatBox = (props: any) =>{
     let puntos_disponibles = props.puntos_disponibles;
     let ptosnivel = props.bonus_nivel
     let setPtosNivel = props.setBonusNivel
+    let nivel_pj = props.nivel_pj;
 
     const [numero,setNumero] = useState(10)
     const [estadistica_final,setEstadisticaFinal] = useState(10)
@@ -129,6 +130,11 @@ export const StatBox = (props: any) =>{
     useEffect(() =>{
         calcular_modificador();
     },[estadistica_final])
+
+
+    useEffect(() =>{
+        setBonusNivel(0);
+    },[nivel_pj])
 
 
 

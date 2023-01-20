@@ -45,7 +45,7 @@ export const Stat_frame = () =>{
               <th>Ability Modifier</th>
             </tr>
           {stats.map(stat => 
-            <StatBox stat_name = {stat} setPuntosDisponibles = {setPuntosDisponibles} puntos_disponibles = {puntos_disponibles} bonus_nivel = {bonusNivel} setBonusNivel = {setbonusNivel}></StatBox>)}
+            <StatBox stat_name = {stat} setPuntosDisponibles = {setPuntosDisponibles} puntos_disponibles = {puntos_disponibles} bonus_nivel = {bonusNivel} setBonusNivel = {setbonusNivel} nivel_pj = {nivel}></StatBox>)}
           </table>
         </div>
         
