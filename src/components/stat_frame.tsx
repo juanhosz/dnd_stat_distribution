@@ -11,18 +11,18 @@ export const Stat_frame = () =>{
   
     function actualizarBonusNivel(nivel: any){
       setNivel(nivel)
-      let sumatoria = 0;
+      let puntos_utilizados = 0;
       for (let i = 1; i < nivel; i++){
 
         if (i >= 10){
-          console.log("el numero es mayor o igual a 10")
-          sumatoria = sumatoria + 2;
+
+          puntos_utilizados = puntos_utilizados + 2;
         }
         else{
-          sumatoria++;
+          puntos_utilizados++;
         }
       }
-      setbonusNivel(sumatoria)
+      setbonusNivel(puntos_utilizados)
     }
   
     return (
