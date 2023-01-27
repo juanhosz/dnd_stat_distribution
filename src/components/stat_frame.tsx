@@ -31,9 +31,10 @@ export const Stat_frame = () =>{
         <div className="box_puntos_disponibles">Puntos disponibles = </div><input className = 'box_puntosDisponibles' value={puntos_disponibles} onChange={e => setPuntosDisponibles(Number(e.target.value))}></input>
         <div></div>
         <br></br>
-        Nivel del personaje = <input placeholder='Nivel ' onChange={e => actualizarBonusNivel(Number(e.target.value))}></input>
-        
-        <div> Bonus de nivel = {bonusNivel}</div>
+        <div className="box_nivel_personaje">
+        Nivel del personaje = <input placeholder='Nivel' className="box_nivel_personaje" onChange={e => actualizarBonusNivel(Number(e.target.value))}></input>
+        </div>
+        <div className="box_nivel_personaje"> Bonus de nivel = {bonusNivel}</div>
         <div className = 'parent_table'>
           <table className="table_format">
             <thead>

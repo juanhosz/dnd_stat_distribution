@@ -40,11 +40,11 @@
 
 .parent_portrait{
   width: auto;
-  height: 70px;
+  height: auto;
   display: flex;
   background: black;
   background-color: black;
-  font-size: 50px;
+  font-size: 2vw;
   font-family: Papyrus,fantasy;
   color: white;
 }

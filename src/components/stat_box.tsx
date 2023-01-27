@@ -118,6 +118,7 @@ export const StatBox = (props: any) =>{
     useEffect(() =>{
         setEstadisticaFinal(Number(statInical) + Number(bonus_nivel) + Number(bonus_raza));
 
+        //calcular_modificador();
     },[bonus_nivel,bonus_raza,statInical])
 
     useEffect(() =>{
@@ -193,6 +194,7 @@ export const StatBox = (props: any) =>{
 
                 {modificador_positivo()&& <td className="box_modificador" style={{'color':'green'}}> + {modificadorAbilidad}</td>}
                 {!modificador_positivo()&& <td className="box_modificador" style={{'color':'red'}}>  {modificadorAbilidad}</td>}
+                
             </tr>
     );
 }
