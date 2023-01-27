@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { isCallSignatureDeclaration } from "typescript";
 
 export const StatBox = (props: any) =>{
     let nombreStat = props.stat_name;
@@ -28,7 +27,7 @@ export const StatBox = (props: any) =>{
             return
         }
 
-        if (statFinal > 13 || (statInical == 14)){
+        if (statFinal > 13 || (statInical === 14)){
             if (ptos_disponibles < 2 && statFinal> statInical){
                 console.log("No hay puntos suficientes")
                 return;
@@ -119,7 +118,6 @@ export const StatBox = (props: any) =>{
     useEffect(() =>{
         setEstadisticaFinal(Number(statInical) + Number(bonus_nivel) + Number(bonus_raza));
 
-        //calcular_modificador();
     },[bonus_nivel,bonus_raza,statInical])
 
     useEffect(() =>{
@@ -195,7 +193,6 @@ export const StatBox = (props: any) =>{
 
                 {modificador_positivo()&& <td className="box_modificador" style={{'color':'green'}}> + {modificadorAbilidad}</td>}
                 {!modificador_positivo()&& <td className="box_modificador" style={{'color':'red'}}>  {modificadorAbilidad}</td>}
-                
             </tr>
     );
 }

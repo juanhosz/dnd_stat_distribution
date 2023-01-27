@@ -98,6 +98,10 @@
 }
 
 
-.prueba{
+.box_puntos_disponibles{
   font-family: OCR A Std, monospace;
+}
+
+.parent_table{
+  overflow-x:auto;
 }

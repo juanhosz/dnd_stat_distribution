@@ -28,24 +28,28 @@ export const Stat_frame = () =>{
     return (
       <div className='centered_parent'>
         
-        <div className="prueba">Puntos disponibles = </div><input className = 'box_puntosDisponibles' value={puntos_disponibles} onChange={e => setPuntosDisponibles(Number(e.target.value))}></input>
+        <div className="box_puntos_disponibles">Puntos disponibles = </div><input className = 'box_puntosDisponibles' value={puntos_disponibles} onChange={e => setPuntosDisponibles(Number(e.target.value))}></input>
         <div></div>
         <br></br>
         Nivel del personaje = <input placeholder='Nivel ' onChange={e => actualizarBonusNivel(Number(e.target.value))}></input>
         
         <div> Bonus de nivel = {bonusNivel}</div>
-        <div>
+        <div className = 'parent_table'>
           <table className="table_format">
-            <tr>
-              <th>Stat</th>
-              <th>Inicial</th>
-              <th>Bonus de raza</th>
-              <th>Bonus de nivel</th>
-              <th>Ability Score</th>
-              <th>Ability Modifier</th>
-            </tr>
-          {stats.map(stat => 
-            <StatBox stat_name = {stat} setPuntosDisponibles = {setPuntosDisponibles} puntos_disponibles = {puntos_disponibles} bonus_nivel = {bonusNivel} setBonusNivel = {setbonusNivel} nivel_pj = {nivel}></StatBox>)}
+            <thead>
+              <tr>
+                <th>Stat</th>
+                <th>Inicial</th>
+                <th>Bonus de raza</th>
+                <th>Bonus de nivel</th>
+                <th>Ability Score</th>
+                <th>Ability Modifier</th>
+              </tr>
+            </thead>
+            <tbody>
+              {stats.map(stat => 
+              <StatBox stat_name = {stat} setPuntosDisponibles = {setPuntosDisponibles} puntos_disponibles = {puntos_disponibles} bonus_nivel = {bonusNivel} setBonusNivel = {setbonusNivel} nivel_pj = {nivel}></StatBox>)}
+            </tbody>
           </table>
         </div>
         
