@@ -41,8 +41,9 @@ export const Stat_frame = () =>{
               <tr>
                 <th>Stat</th>
                 <th>Inicial</th>
-                <th>Bonus de raza</th>
-                <th>Bonus de nivel</th>
+                <th>Bonus de Raza</th>
+                <th>Bonus de Feats</th>
+                <th>Bonus de Nivel</th>
                 <th>Ability Score</th>
                 <th>Ability Modifier</th>
               </tr>

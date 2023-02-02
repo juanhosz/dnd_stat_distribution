@@ -7,12 +7,14 @@ export const StatBox = (props: any) =>{
     let ptosnivel = props.bonus_nivel
     let setPtosNivel = props.setBonusNivel
     let nivel_pj = props.nivel_pj;
+    
 
-    const [statInical,setStatInicial] = useState(10)
+    const [statInical,setStatInicial] = useState(10) //? Numero de los stats al distribuir
     const [estadistica_final,setEstadisticaFinal] = useState(10)
     const [bonus_raza, setBonusRaza] = useState(0)
     const [bonus_nivel, setBonusNivel] = useState(0)
     const [modificadorAbilidad,setModificador] = useState(0)
+    const [bonusFeat,setBonusFeat] = useState(0)
 
 
     function setear_caracteristica(stat:any){
@@ -116,10 +118,10 @@ export const StatBox = (props: any) =>{
     }
 
     useEffect(() =>{
-        setEstadisticaFinal(Number(statInical) + Number(bonus_nivel) + Number(bonus_raza));
+        setEstadisticaFinal(Number(statInical) + Number(bonus_nivel) + Number(bonus_raza) + Number(bonusFeat));
 
         //calcular_modificador();
-    },[bonus_nivel,bonus_raza,statInical])
+    },[bonus_nivel,bonus_raza,statInical,bonusFeat]);
 
     useEffect(() =>{
         calcular_modificador();
@@ -183,7 +185,10 @@ export const StatBox = (props: any) =>{
                 </input>
                 </td>
                 <td>
-                <input type="number" placeholder="Bonus de nivel" min = {0} max = {bonus_nivel+ptosnivel} title = {"bonus de nivel"} value = {bonus_nivel.toString()} onChange = {e => setBonusNivelFuncion(Number(e.target.value))}> 
+                <input type = "number" placeholder="Bonus de Feat" min = {0} onChange = {e => setBonusFeat(Number(e.target.value))}></input>
+                </td>
+                <td>
+                <input type="number" placeholder="Bonus de Nivel" min = {0} max = {bonus_nivel+ptosnivel} title = {"bonus de nivel"} value = {bonus_nivel.toString()} onChange = {e => setBonusNivelFuncion(Number(e.target.value))}> 
                 </input>
                 </td>
 
