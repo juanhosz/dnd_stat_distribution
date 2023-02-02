@@ -182,7 +182,6 @@ export const StatBox = (props: any) =>{
                 <input type="number" placeholder="Bonus de raza" min = {0} onChange = {e => setBonusRaza(Number(e.target.value))}>
                 </input>
                 </td>
-
                 <td>
                 <input type="number" placeholder="Bonus de nivel" min = {0} max = {bonus_nivel+ptosnivel} title = {"bonus de nivel"} value = {bonus_nivel.toString()} onChange = {e => setBonusNivelFuncion(Number(e.target.value))}> 
                 </input>
