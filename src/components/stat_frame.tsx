@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { StatBox } from "./stat_box";
 
 export const Stat_frame = () =>{
@@ -8,13 +8,15 @@ export const Stat_frame = () =>{
     const[bonusNivel, setbonusNivel] = useState(0)
 
     const [nivel,setNivel] = useState(0)
+
+    const[abilityScoreMaximo, setAbilityScoreMaximo] = useState(30);
   
     function actualizarBonusNivel(nivel: any){
       setNivel(nivel)
       let puntos_utilizados = 0;
       for (let i = 1; i < nivel; i++){
 
-        if (i >= 10){
+        if (i >= 9){
 
           puntos_utilizados = puntos_utilizados + 2;
         }
@@ -24,7 +26,22 @@ export const Stat_frame = () =>{
       }
       setbonusNivel(puntos_utilizados)
     }
-  
+
+
+    useEffect(() =>{
+      actualizarAbilityScoreMaximo();
+    }, [nivel]);
+    
+    function actualizarAbilityScoreMaximo(){
+      if(nivel <= 14){
+        setAbilityScoreMaximo(30);
+      }
+      else{
+        setAbilityScoreMaximo(35)
+      }
+      return;
+    }
+
     return (
       <div className='centered_parent'>
         
@@ -35,6 +52,7 @@ export const Stat_frame = () =>{
         Nivel del personaje = <input placeholder='Nivel' className="box_nivel_personaje" onChange={e => actualizarBonusNivel(Number(e.target.value))}></input>
         </div>
         <div className="box_nivel_personaje"> Bonus de nivel = {bonusNivel}</div>
+        <div style={{'color':'red'}}> ¡¡Maximum Ability Score = {abilityScoreMaximo}!!</div>
         <div className = 'parent_table'>
           <table className="table_format">
             <thead>
@@ -50,7 +68,7 @@ export const Stat_frame = () =>{
             </thead>
             <tbody>
               {stats.map(stat => 
-              <StatBox stat_name = {stat} setPuntosDisponibles = {setPuntosDisponibles} puntos_disponibles = {puntos_disponibles} bonus_nivel = {bonusNivel} setBonusNivel = {setbonusNivel} nivel_pj = {nivel}></StatBox>)}
+              <StatBox maximumAbilityScore = {abilityScoreMaximo} stat_name = {stat} setPuntosDisponibles = {setPuntosDisponibles} puntos_disponibles = {puntos_disponibles} bonus_nivel = {bonusNivel} setBonusNivel = {setbonusNivel} nivel_pj = {nivel}></StatBox>)}
             </tbody>
           </table>
         </div>

@@ -1,29 +1,38 @@
 import { useEffect, useState } from "react";
 
 export const StatBox = (props: any) =>{
+    
     let nombreStat = props.stat_name;
     let setPuntosDisponibles = props.setPuntosDisponibles;
     let puntos_disponibles = props.puntos_disponibles;
-    let ptosnivel = props.bonus_nivel
-    let setPtosNivel = props.setBonusNivel
+    let ptosnivel = props.bonus_nivel;
+    let setPtosNivel = props.setBonusNivel;
     let nivel_pj = props.nivel_pj;
-    
+    let maximumAbilityScore = props.maximumAbilityScore;
 
-    const [statInical,setStatInicial] = useState(10) //? Numero de los stats al distribuir
-    const [estadistica_final,setEstadisticaFinal] = useState(10)
-    const [bonus_raza, setBonusRaza] = useState(0)
-    const [bonus_nivel, setBonusNivel] = useState(0)
-    const [modificadorAbilidad,setModificador] = useState(0)
-    const [bonusFeat,setBonusFeat] = useState(0)
+
+    //TODO: Se debe implementar el maximo ability score para el proximo update;
+    //TODO:30 a 35 te cuesta 2 y 35 es el cap . en 35 tenes un +14, 31 te cuesta 2
+    //TODO:nivel 5 incluido no podes pasarte de 20  y en 14 podes poner puntos mas alla de 30
+    
+    const [statInical,setStatInicial] = useState(10); //* Numero de los stats al distribuir
+    const [estadistica_final,setEstadisticaFinal] = useState(10); //* Numero que indica el ability score final
+    const [bonus_raza, setBonusRaza] = useState(0); //* Numero que indical los puntos que otorga la raza
+    const [bonus_nivel, setBonusNivel] = useState(0); //* Numero que indica los puntos que se agregaron por el nivel
+    const [modificadorAbilidad,setModificador] = useState(0);
+    const [bonusFeat,setBonusFeat] = useState(0);
 
 
     function setear_caracteristica(stat:any){
         let statFinal = Number(stat.target.value);
         let ptos_disponibles = Number(puntos_disponibles);
 
+
+
         if ( statFinal> statInical && Math.abs(calcularPuntosUtilizados(statInical,statFinal)) > ptos_disponibles){
-            let numero_maximo = calcularStatFinalMaximo(statInical,statFinal)
-            let ptos_utilizados = calcularPuntosUtilizados(statInical,numero_maximo)
+            
+            let numero_maximo = calcularStatFinalMaximo(statInical,statFinal);
+            let ptos_utilizados = calcularPuntosUtilizados(statInical,numero_maximo);
             setPuntosDisponibles(ptos_disponibles + ptos_utilizados);
             setStatInicial(numero_maximo);
             return
@@ -31,17 +40,17 @@ export const StatBox = (props: any) =>{
 
         if (statFinal > 13 || (statInical === 14)){
             if (ptos_disponibles < 2 && statFinal> statInical){
-                console.log("No hay puntos suficientes")
+                console.log("No hay puntos suficientes");
                 return;
             }
         };
 
         if(ptos_disponibles <= 0 && statFinal> statInical){
-            console.log("No hay puntos disponbiles")
-            return
+            console.log("No hay puntos disponbiles");
+            return;
         };
         
-        setPuntosDisponibles(ptos_disponibles+calcularPuntosUtilizados(statInical,statFinal))
+        setPuntosDisponibles(ptos_disponibles+calcularPuntosUtilizados(statInical,statFinal));
         setStatInicial(statFinal);
         return;
 
@@ -125,12 +134,12 @@ export const StatBox = (props: any) =>{
 
     useEffect(() =>{
         calcular_modificador();
-    },[estadistica_final])
+    },[estadistica_final]);
 
 
     useEffect(() =>{
         setBonusNivel(0);
-    },[nivel_pj])
+    },[nivel_pj]);
 
 
 
@@ -146,13 +155,13 @@ export const StatBox = (props: any) =>{
             for (let i = bonus_inicial; i < bonus_final;i++){
                 if (puntos_utilizados == ptos_disponibles){
                     setBonusNivel(bonus_inicial+puntos_utilizados);
-                    setPtosNivel(ptos_disponibles-puntos_utilizados)
+                    setPtosNivel(ptos_disponibles-puntos_utilizados);
                     return;
                 }
-                puntos_utilizados++
+                puntos_utilizados++;
             }
             setBonusNivel(bonus_final);
-            setPtosNivel(ptos_disponibles-puntos_utilizados)
+            setPtosNivel(ptos_disponibles-puntos_utilizados);
             return
         }
         else{
@@ -160,7 +169,7 @@ export const StatBox = (props: any) =>{
                 puntos_utilizados++
             }
             setBonusNivel(bonus_final);
-            setPtosNivel(ptosnivel+puntos_utilizados)
+            setPtosNivel(ptosnivel+puntos_utilizados);
             return
         }
 
