@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { StatBox } from "./stat_box";
+import tableStyle from "../styles/table.module.css"
 
-export const Stat_frame = () =>{
+export const StatFrame = () =>{
     let stats = ["Strenght","Dexterity","Constitution","Intelligence","Wisdom","Charisma","Honor"];
     const [puntos_disponibles, setPuntosDisponibles] = useState(15)
   
@@ -33,7 +34,10 @@ export const Stat_frame = () =>{
     }, [nivel]);
     
     function actualizarAbilityScoreMaximo(){
-      if(nivel <= 14){
+      if (nivel === 5){
+        setAbilityScoreMaximo(20);
+      }
+      else if(nivel <= 14){
         setAbilityScoreMaximo(30);
       }
       else{
@@ -43,18 +47,18 @@ export const Stat_frame = () =>{
     }
 
     return (
-      <div className='centered_parent'>
-        
-        <div className="box_puntos_disponibles">Puntos disponibles = </div><input className = 'box_puntosDisponibles' value={puntos_disponibles} onChange={e => setPuntosDisponibles(Number(e.target.value))}></input>
+      <div className={tableStyle.centered_parent}>
+        <div>Puntos disponibles = </div>
+        <input value={puntos_disponibles} onChange={e => setPuntosDisponibles(Number(e.target.value))}></input>
         <div></div>
         <br></br>
-        <div className="box_nivel_personaje">
-        Nivel del personaje = <input placeholder='Nivel' className="box_nivel_personaje" onChange={e => actualizarBonusNivel(Number(e.target.value))}></input>
+        <div>
+        Nivel del personaje = <input placeholder='Nivel' onChange={e => actualizarBonusNivel(Number(e.target.value))}></input>
         </div>
-        <div className="box_nivel_personaje"> Bonus de nivel = {bonusNivel}</div>
+        <div> Bonus de nivel = {bonusNivel}</div>
         <div style={{'color':'red'}}> ¡¡Maximum Ability Score = {abilityScoreMaximo}!!</div>
-        <div className = 'parent_table'>
-          <table className="table_format">
+        <div>
+          <table className={tableStyle.table_format}>
             <thead>
               <tr>
                 <th>Stat</th>

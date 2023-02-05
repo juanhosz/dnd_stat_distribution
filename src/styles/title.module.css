@@ -1,0 +1,10 @@
+.title_container{
+    width: auto;
+    height: auto;
+    display: flex;
+    background: black;
+    background-color: black;
+    font-size: 2vw;
+    font-family: Papyrus,fantasy;
+    color: white;
+  }

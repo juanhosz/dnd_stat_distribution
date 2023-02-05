@@ -38,32 +38,12 @@
 }
 
 
-.parent_portrait{
-  width: auto;
-  height: auto;
-  display: flex;
-  background: black;
-  background-color: black;
-  font-size: 2vw;
-  font-family: Papyrus,fantasy;
-  color: white;
-}
-
-.centered_parent{
-  text-align: center;
-  width: 50%;
-  margin:auto;
-  background: transparent;
-  font-family:OCR A Std, monospace;
-  
-}
 
 
-.caracteristica_input{
-  padding-left: 5px;
-  padding-right: 5px;
-  width: 50px;
-}
+
+
+
+
 .stat_name{
   width: 70px;
 }
@@ -73,33 +53,13 @@
   justify-content: space-between;
 }
 
-.box_modificador{
-  padding-left: 10px;
-  margin: 3px;
-}
 
-.box_puntosDisponibles{
-  width: 40px;
-}
+
 
 .imagen_backgorund{
   background-image: url(/src/images/canvas.png);
   width: 1000px;
 
-}
-
-.table_format{
-  border-spacing: 15px;
-}
-
-
-.stat_name{
-  text-align: left;
-}
-
-
-.box_puntos_disponibles{
-  font-family: OCR A Std, monospace;
 }
 
 .parent_table{
