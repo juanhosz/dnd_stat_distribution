@@ -1,9 +1,9 @@
 
 
-export default function calcularPuntosOverflow(statInicial:number,statFinal:number,maximo:number,puntosDisponibles:number,setPuntosDisponibles:any,setStatInicial:any){
+export default function calcularPuntosOverflow(statInicial:number,statFinal:number,maximo:number,puntosDisponibles:number,setPuntosDisponibles:any,setStatInicial:any,estadistica_final:number){
     let [numero_maximo,puntos_utilizados] = calcularStatFinalMaximo(statInicial,statFinal,puntosDisponibles,maximo);
-    let ptos_utilizados = calcularPuntosUtilizados(statInicial,numero_maximo,maximo);
-    setPuntosDisponibles(puntosDisponibles + ptos_utilizados);
+
+    setPuntosDisponibles(puntosDisponibles + puntos_utilizados);
     setStatInicial(numero_maximo);
     return
 }
@@ -38,29 +38,35 @@ export function verificarSiMaximoFinal(final:number,maximo:number){
 }
 
 
-export function calcularPuntosUtilizados(inicial:any,final:any,maximo:number){
+export function calcularPuntosUtilizados(inicial:any,final:any,maximo:number, estadistica_final:any){
     let puntos_utilizados = 0;
+    let puntos_adicionales = 0;
     if (inicial < final){
         for (let i = inicial; i< final;i++){
-            if (i >= 13){
+            if (estadistica_final + puntos_adicionales == maximo){
+                return [Number(puntos_utilizados),puntos_adicionales];
+            }
+            if (estadistica_final + puntos_adicionales >= 13 && i >= 13){
                 puntos_utilizados = puntos_utilizados - 2;
             }
             else{
                 puntos_utilizados--;
             }
+            puntos_adicionales++;
         }
     }
     else{
         for (let i = final; i< inicial;i++){
-            if (i >= 13){
+            if (estadistica_final + puntos_adicionales >= 13 && i >= 13){
                 puntos_utilizados = puntos_utilizados + 2;
             }
             else{
                 puntos_utilizados++;
             }
+            puntos_adicionales--;
         }
     }
-    return Number(puntos_utilizados);
+    return [Number(puntos_utilizados),puntos_adicionales];
 }
 
 
@@ -111,6 +117,11 @@ export  function BonusNivelFuncion(stat:any,bonus_nivel:number,ptosnivel:number,
                 return;
             }
             if (maximo == 35 && estadistica_final >= 30){
+                if (puntos_utilizados + 2 > ptos_disponibles){
+                    setBonusNivel(bonus_inicial+puntos_utilizados);
+                    setPtosNivel(ptos_disponibles-puntos_utilizados);
+                    return
+                }
                 puntos_utilizados = puntos_utilizados +2;
             }
             else{

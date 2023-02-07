@@ -32,7 +32,7 @@ export const StatBox = (props: any) =>{
         let ptos_disponibles = Number(puntos_disponibles);
 
         if ( statFinal> statInicial && Math.abs(verificarSiUtilizanMasPuntos(statInicial,statFinal)) > ptos_disponibles){
-            calcularPuntosOverflow(statInicial,statFinal,maximumAbilityScore,ptos_disponibles,setPuntosDisponibles,setStatInicial);
+            calcularPuntosOverflow(statInicial,statFinal,maximumAbilityScore,ptos_disponibles,setPuntosDisponibles,setStatInicial,estadistica_final);
             return;
             
         }
@@ -48,8 +48,10 @@ export const StatBox = (props: any) =>{
             console.log("No hay puntos disponbiles");
             return;
         };
-        setPuntosDisponibles(ptos_disponibles+calcularPuntosUtilizados(statInicial,statFinal,maximumAbilityScore));
-        setStatInicial(verificarSiMaximoFinal(statFinal,maximumAbilityScore));
+
+        let [puntos_utilizados,puntos_adicionales] = calcularPuntosUtilizados(statInicial,statFinal,maximumAbilityScore,estadistica_final);
+        setPuntosDisponibles(ptos_disponibles + puntos_utilizados);
+        setStatInicial(statInicial+puntos_adicionales);
         return;
 
     }
@@ -107,7 +109,7 @@ export const StatBox = (props: any) =>{
     }
 
     return(
-            <tr>
+            <tr id = {nombreStat}>
                 <td className={rowStyle.stat_name}>{nombreStat}</td>
 
                 <td><input className={rowStyle.caracteristica_input} type="number" placeholder="Estadisticas iniciales" min={0} value = {statInicial.toString()} onChange = {e => setear_caracteristica(e)}

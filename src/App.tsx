@@ -4,7 +4,6 @@ import titleStyle from './styles/title.module.css'
 
 
 function App() {
-
   return (
     <div>
       <div className={titleStyle.title_container}>Chelo & Dragons - Distribución de estadísticas</div>

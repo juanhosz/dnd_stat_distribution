@@ -45,7 +45,6 @@ export const StatFrame = () =>{
       }
       return;
     }
-
     return (
       <div className={tableStyle.centered_parent}>
         <div>Puntos disponibles = </div>
@@ -58,7 +57,7 @@ export const StatFrame = () =>{
         <div> Bonus de nivel = {bonusNivel}</div>
         <div style={{'color':'red'}}> ¡¡Maximum Ability Score = {abilityScoreMaximo}!!</div>
         <div>
-          <table className={tableStyle.table_format}>
+          <table id = {"table-id"} className={tableStyle.table_format}>
             <thead>
               <tr>
                 <th>Stat</th>
@@ -71,8 +70,8 @@ export const StatFrame = () =>{
               </tr>
             </thead>
             <tbody>
-              {stats.map(stat => 
-              <StatBox maximumAbilityScore = {abilityScoreMaximo} stat_name = {stat} setPuntosDisponibles = {setPuntosDisponibles} puntos_disponibles = {puntos_disponibles} bonus_nivel = {bonusNivel} setBonusNivel = {setbonusNivel} nivel_pj = {nivel}></StatBox>)}
+              {stats.map((stat) => 
+              <StatBox key = {stat} maximumAbilityScore = {abilityScoreMaximo} stat_name = {stat} setPuntosDisponibles = {setPuntosDisponibles} puntos_disponibles = {puntos_disponibles} bonus_nivel = {bonusNivel} setBonusNivel = {setbonusNivel} nivel_pj = {nivel}></StatBox>)}
             </tbody>
           </table>
         </div>
