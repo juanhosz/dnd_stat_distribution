@@ -1,9 +1,22 @@
 import { useEffect, useState } from "react";
 import { StatBox } from "./stat_box";
 import tableStyle from "../styles/table.module.css"
+import {Personaje} from "./types"
 
 export const StatFrame = () =>{
     let stats = ["Strenght","Dexterity","Constitution","Intelligence","Wisdom","Charisma","Honor"];
+
+    let personajeInicial : Personaje ={
+      "Strenght": 0,
+      "Dexterity": 0,
+      "Constitution": 0,
+      "Intelligence": 0,
+      "Wisdom": 0,
+      "Charisma": 0,
+      "Honor": 0,
+    }
+    
+    const [personaje, setPersonaje] = useState(personajeInicial);
     const [puntos_disponibles, setPuntosDisponibles] = useState(15)
   
     const[bonusNivel, setbonusNivel] = useState(0)
@@ -32,6 +45,8 @@ export const StatFrame = () =>{
     useEffect(() =>{
       actualizarAbilityScoreMaximo();
     }, [nivel]);
+
+
     
     function actualizarAbilityScoreMaximo(){
       if (nivel === 5){
@@ -45,6 +60,7 @@ export const StatFrame = () =>{
       }
       return;
     }
+
     return (
       <div className={tableStyle.centered_parent}>
         <div>Puntos disponibles = </div>

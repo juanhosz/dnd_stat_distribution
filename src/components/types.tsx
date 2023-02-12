@@ -1,5 +1,5 @@
 export interface Personaje{
-    Stenght: number;
+    Strenght: number;
     Dexterity: number;
     Constitution: number;
     Intelligence: number;
