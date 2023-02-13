@@ -1,32 +1,79 @@
 import { useEffect, useState } from "react";
 import { StatBox } from "./stat_box";
 import tableStyle from "../styles/table.module.css"
-import {Personaje} from "./types"
+import {Atributos, Personaje} from "./types"
 
 export const StatFrame = () =>{
     let stats = ["Strenght","Dexterity","Constitution","Intelligence","Wisdom","Charisma","Honor"];
 
-    let personajeInicial : Personaje ={
+    let atributosInicial : Personaje ={
+      "Strenght": 10,
+      "Dexterity": 10,
+      "Constitution": 10,
+      "Intelligence": 10,
+      "Wisdom": 10,
+      "Charisma": 10,
+      "Honor": 10,
+    }
+
+    let atributosNivelInicial: Personaje = {
       "Strenght": 0,
       "Dexterity": 0,
       "Constitution": 0,
       "Intelligence": 0,
-      "Wisdom": 0,
-      "Charisma": 0,
-      "Honor": 0,
+      "Wisdom":0,
+      "Charisma":0,
+      "Honor":0,
     }
+
+    let atributosFeatInicial: Personaje = {
+      "Strenght":0,
+      "Dexterity":0,
+      "Constitution":0,
+      "Intelligence":0,
+      "Wisdom":0,
+      "Charisma":0,
+      "Honor":0,
+    }
+
+    let atributosRazaInicial: Personaje  = {
+      "Strenght":0,
+      "Dexterity":0,
+      "Constitution":0,
+      "Intelligence":0,
+      "Wisdom":0,
+      "Charisma":0,
+      "Honor":0,
+    }
+
+    let atributosPrincipalesInicial: Atributos = {
+      AbilityScoreMaximo: 20,
+      Nivel: 0,
+      BonusNivel: 0,
+      PuntosDisponibles: 15,
+    }
+
     
-    const [personaje, setPersonaje] = useState(personajeInicial);
-    const [puntos_disponibles, setPuntosDisponibles] = useState(15)
+    const [atributos, setAtributos] = useState(atributosInicial);
+    const [atributosNivel, setAtributosNivel] = useState(atributosNivelInicial);
+    const [atributosFeat, setAtributosFeat] = useState(atributosFeatInicial);
+    const [atributosRaza, setAtributosRaza] = useState(atributosRazaInicial);
+    const [settings,setSettings] = useState(atributosPrincipalesInicial);
+    
+    let constArray = [[atributos, setAtributos],
+                    [atributosNivel, setAtributosNivel],
+                    [atributosFeat, setAtributosFeat],
+                    [atributosRaza,setAtributosRaza],
+                    [settings,setSettings]];
+    //const [puntos_disponibles, setPuntosDisponibles] = useState(15)
   
-    const[bonusNivel, setbonusNivel] = useState(0)
+    //const[bonusNivel, setbonusNivel] = useState(0)
 
-    const [nivel,setNivel] = useState(0)
+    //const [nivel,setNivel] = useState(0)
 
-    const[abilityScoreMaximo, setAbilityScoreMaximo] = useState(30);
+    //const[abilityScoreMaximo, setAbilityScoreMaximo] = useState(30);
   
-    function actualizarBonusNivel(nivel: any){
-      setNivel(nivel)
+    function actualizarBonusNivel(nivel: number){
       let puntos_utilizados = 0;
       for (let i = 1; i < nivel; i++){
 
@@ -38,25 +85,26 @@ export const StatFrame = () =>{
           puntos_utilizados++;
         }
       }
-      setbonusNivel(puntos_utilizados)
+      setSettings({...settings, "BonusNivel":puntos_utilizados,"Nivel": nivel})
     }
 
 
     useEffect(() =>{
       actualizarAbilityScoreMaximo();
-    }, [nivel]);
+    },[settings.Nivel]);
+
 
 
     
     function actualizarAbilityScoreMaximo(){
-      if (nivel === 5){
-        setAbilityScoreMaximo(20);
+      if (settings.Nivel <= 5 && settings.Nivel < 14){
+        setSettings({...settings, "AbilityScoreMaximo":20});
       }
-      else if(nivel <= 14){
-        setAbilityScoreMaximo(30);
+      else if(settings.Nivel <= 14){
+        setSettings({...settings, "AbilityScoreMaximo":30});
       }
       else{
-        setAbilityScoreMaximo(35)
+        setSettings({...settings, "AbilityScoreMaximo":35})
       }
       return;
     }
@@ -64,14 +112,14 @@ export const StatFrame = () =>{
     return (
       <div className={tableStyle.centered_parent}>
         <div>Puntos disponibles = </div>
-        <input value={puntos_disponibles} onChange={e => setPuntosDisponibles(Number(e.target.value))}></input>
+        <input value={settings.PuntosDisponibles} onChange={e => setSettings({...settings, "PuntosDisponibles":Number(e.target.value)})}></input>
         <div></div>
         <br></br>
         <div>
-        Nivel del personaje = <input placeholder='Nivel' onChange={e => actualizarBonusNivel(Number(e.target.value))}></input>
+        Nivel del personaje = <input value = {settings.Nivel} placeholder='Nivel' onChange={e => actualizarBonusNivel(Number(e.target.value))}></input>
         </div>
-        <div> Bonus de nivel = {bonusNivel}</div>
-        <div style={{'color':'red'}}> ¡¡Maximum Ability Score = {abilityScoreMaximo}!!</div>
+        <div> Bonus de nivel = {settings.BonusNivel}</div>
+        <div style={{'color':'red'}}> ¡¡Maximum Ability Score = {settings.AbilityScoreMaximo}!!</div>
         <div>
           <table id = {"table-id"} className={tableStyle.table_format}>
             <thead>
@@ -87,7 +135,8 @@ export const StatFrame = () =>{
             </thead>
             <tbody>
               {stats.map((stat) => 
-              <StatBox key = {stat} maximumAbilityScore = {abilityScoreMaximo} stat_name = {stat} setPuntosDisponibles = {setPuntosDisponibles} puntos_disponibles = {puntos_disponibles} bonus_nivel = {bonusNivel} setBonusNivel = {setbonusNivel} nivel_pj = {nivel}></StatBox>)}
+              <StatBox key = {stat}  stat_name = {stat}  arrayStats = {constArray}>
+              </StatBox>)}
             </tbody>
           </table>
         </div>
