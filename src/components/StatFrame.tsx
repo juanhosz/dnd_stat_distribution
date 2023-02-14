@@ -88,14 +88,6 @@ export const StatFrame = () =>{
       setSettings({...settings, "BonusNivel":puntos_utilizados,"Nivel": nivel})
     }
 
-
-    useEffect(() =>{
-      actualizarAbilityScoreMaximo();
-    },[settings.Nivel]);
-
-
-
-    
     function actualizarAbilityScoreMaximo(){
       if (settings.Nivel <= 5 && settings.Nivel < 14){
         setSettings({...settings, "AbilityScoreMaximo":20});
@@ -108,6 +100,15 @@ export const StatFrame = () =>{
       }
       return;
     }
+    
+    useEffect(() =>{
+      actualizarAbilityScoreMaximo();
+    },[settings.Nivel]);
+
+
+
+    
+
 
     return (
       <div className={tableStyle.centered_parent}>

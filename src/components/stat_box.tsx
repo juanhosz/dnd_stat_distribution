@@ -1,6 +1,5 @@
-import { useEffect, useState } from "react";
-import calcularPuntosOverflow, { BonusNivelFuncion, calcularPuntosUtilizados, calcularStatFinalMaximo, verificarSiMaximoFinal, verificarSiUtilizanMasPuntos } from "../utils/statCalculatorModule";
-import CalculatorService from "../utils/statCalculatorModule";
+import { useCallback, useEffect, useState } from "react";
+import calcularPuntosOverflow, { BonusNivelFuncion, calcularPuntosUtilizados, verificarSiUtilizanMasPuntos } from "../utils/statCalculatorModule";
 import rowStyle from "../styles/row.module.css"
 import {Atributos, Personaje} from "./types"
 
@@ -8,7 +7,6 @@ import {Atributos, Personaje} from "./types"
 export const StatBox = (props: any) =>{
     
     const nombreStat: string = props.stat_name;
-    let Nivel = "Nivel" as keyof Atributos;
     let statName = props.stat_name as keyof Personaje;
     let [atributosIni,setAtributos] = props.arrayStats[0];
     let [atributosNivelIni,setAtributosNivel] = props.arrayStats[1];
@@ -67,9 +65,9 @@ export const StatBox = (props: any) =>{
 
     }
 
-    function calcular_modificador(){
+    const calcular_modificador = useCallback(() =>{
         let puntos = 0;
-        if (estadistica_final == 35){
+        if (estadistica_final === 35){
             setModificador(14);
             return;
         }
@@ -90,33 +88,7 @@ export const StatBox = (props: any) =>{
             }
         }
         setModificador(Math.floor(puntos/2));
-    }
-
-    useEffect(() =>{
-        setEstadisticaFinal(Number(atributos[statName]) + Number(atributosNivel[statName]) + Number(atributosRaza[statName]) + Number(atributosFeat[statName]));
-
-        //calcular_modificador();
-    },[atributosNivel[statName],atributos[statName],atributosFeat[statName],atributosRaza[statName]]);
-
-    useEffect(() =>{
-        calcular_modificador();
-    },[estadistica_final]);
-
-
-    useEffect(() =>{
-        let atributosNivelInicial: Personaje = {
-            "Strenght": 0,
-            "Dexterity": 0,
-            "Constitution": 0,
-            "Intelligence": 0,
-            "Wisdom":0,
-            "Charisma":0,
-            "Honor":0,
-          }
-        setAtributosNivel(atributosNivelInicial);
-    },[settings[Nivel]]);
-
-
+    },[estadistica_final])
 
     function setBonusNivelFuncion(stat:any){
         BonusNivelFuncion(stat,atributosNivel,settings,estadistica_final,setAtributosNivel,setSettings,statName,nombreStat);
@@ -127,6 +99,19 @@ export const StatBox = (props: any) =>{
         if (modificadorAbilidad >= 0) return true;
         return false;
     }
+    useEffect(() =>{
+        setEstadisticaFinal(Number(atributos[statName]) + Number(atributosNivel[statName]) + Number(atributosRaza[statName]) + Number(atributosFeat[statName]));
+
+        //calcular_modificador();
+    },[atributosNivel[statName],atributos[statName],atributosFeat[statName],atributosRaza[statName],statName]);// eslint-disable-line react-hooks/exhaustive-deps
+
+    useEffect(() =>{
+        calcular_modificador();
+    },[estadistica_final, calcular_modificador]);
+
+
+
+
 
     return(
             <tr id = {nombreStat}>
