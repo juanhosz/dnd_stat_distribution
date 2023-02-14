@@ -92,7 +92,7 @@ export const StatFrame = () =>{
       if (settings.Nivel <= 5 && settings.Nivel < 14){
         setSettings({...settings, "AbilityScoreMaximo":20});
       }
-      else if(settings.Nivel <= 14){
+      else if(settings.Nivel < 14){
         setSettings({...settings, "AbilityScoreMaximo":30});
       }
       else{
@@ -100,7 +100,7 @@ export const StatFrame = () =>{
       }
       return;
     }
-    
+
     useEffect(() =>{
       actualizarAbilityScoreMaximo();
     },[settings.Nivel]);
