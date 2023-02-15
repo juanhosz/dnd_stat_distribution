@@ -6,6 +6,10 @@ import {Atributos, Personaje} from "../types/types"
 export const StatFrame = () =>{
     let stats = ["Strenght","Dexterity","Constitution","Intelligence","Wisdom","Charisma","Honor"];
 
+
+
+
+
     let atributosInicial : Personaje ={
       "Strenght": 10,
       "Dexterity": 10,
@@ -47,24 +51,62 @@ export const StatFrame = () =>{
     }
 
     let atributosPrincipalesInicial: Atributos = {
-      AbilityScoreMaximo: 20,
-      Nivel: 0,
-      BonusNivel: 0,
-      PuntosDisponibles: 15,
+      "AbilityScoreMaximo": 20,
+      "Nivel": 0,
+      "BonusNivel": 0,
+      "PuntosDisponibles": 15,
+    }
+    let atributosCache = window.localStorage.getItem("ATRIBUTOS")
+    if (atributosCache){
+      var atributosParse = JSON.parse(atributosCache);
+    }
+    else{
+      atributosParse = false;
     }
 
+      
+
+
+    const [fueGuarado, setFueGuardado] = useState(false);
+    const [atributos, setAtributos] = useState(parser(atributosParse.atributos,atributosInicial));
+    const [atributosNivel, setAtributosNivel] = useState(parser(atributosParse.atributosNivel,atributosNivelInicial));
+    const [atributosFeat, setAtributosFeat] = useState(parser(atributosParse.atributosFeat,atributosFeatInicial));
+    const [atributosRaza, setAtributosRaza] = useState(parser(atributosParse.atributosRaza,atributosRazaInicial));
+    const [settings,setSettings] = useState(parser(atributosParse.settings,atributosPrincipalesInicial));
+
+    function parser(state:any,other:any){
+      if (!state){
+        return other;
+      }
+      return state
+    }
+
+
     
-    const [atributos, setAtributos] = useState(atributosInicial);
-    const [atributosNivel, setAtributosNivel] = useState(atributosNivelInicial);
-    const [atributosFeat, setAtributosFeat] = useState(atributosFeatInicial);
-    const [atributosRaza, setAtributosRaza] = useState(atributosRazaInicial);
-    const [settings,setSettings] = useState(atributosPrincipalesInicial);
+
+    useEffect(() =>{
+      
+      if (atributosCache) {
+        let atributosParse = JSON.parse(atributosCache);
+        console.log(atributosParse);
+        setAtributos(atributosParse.atributos);
+        setAtributosFeat(atributosParse.atributosFeat);
+        setSettings(atributosParse.settings);
+        setAtributosRaza(atributosParse.atributosRaza);
+        setAtributosNivel(atributosParse.atributosNivel);
+      }
+    },[]);
+
     
+
+
+
+
     let constArray = [[atributos, setAtributos],
-                    [atributosNivel, setAtributosNivel],
-                    [atributosFeat, setAtributosFeat],
-                    [atributosRaza,setAtributosRaza],
-                    [settings,setSettings]];
+    [atributosNivel, setAtributosNivel],
+    [atributosFeat, setAtributosFeat],
+    [atributosRaza,setAtributosRaza],
+    [settings,setSettings]];
     //const [puntos_disponibles, setPuntosDisponibles] = useState(15)
   
     //const[bonusNivel, setbonusNivel] = useState(0)
@@ -103,11 +145,25 @@ export const StatFrame = () =>{
 
     useEffect(() =>{
       actualizarAbilityScoreMaximo();
-    },[settings.Nivel]);
+    },[settings.Nivel]); 
 
 
+    useEffect(() =>{
+      window.localStorage.setItem("ATRIBUTOS",JSON.stringify({"atributos":atributos,
+                                  "atributosNivel":atributosNivel,
+                                  "atributosFeat":atributosFeat,
+                                  "atributosRaza":atributosRaza,
+                                  "settings":settings}));
+
+    },[atributos,settings,atributosNivel,atributosFeat,atributosRaza])
 
     
+
+
+
+
+
+
 
 
     return (

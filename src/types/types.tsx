@@ -5,7 +5,8 @@ export interface Personaje{
     "Intelligence": number;
     "Wisdom": number;
     "Charisma": number;
-    "Honor": number
+    "Honor": number;
+
 }
 
 export interface Atributos{
@@ -13,4 +14,5 @@ export interface Atributos{
     "Nivel": number;
     "BonusNivel": number;
     "PuntosDisponibles": number;
+
 }
