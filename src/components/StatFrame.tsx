@@ -82,20 +82,6 @@ export const StatFrame = () =>{
     }
 
 
-    
-
-    useEffect(() =>{
-      
-      if (atributosCache) {
-        let atributosParse = JSON.parse(atributosCache);
-        console.log(atributosParse);
-        setAtributos(atributosParse.atributos);
-        setAtributosFeat(atributosParse.atributosFeat);
-        setSettings(atributosParse.settings);
-        setAtributosRaza(atributosParse.atributosRaza);
-        setAtributosNivel(atributosParse.atributosNivel);
-      }
-    },[]);
 
     
 
@@ -143,6 +129,14 @@ export const StatFrame = () =>{
       return;
     }
 
+    function resetElements(){
+      setAtributos(atributosInicial);
+      setAtributosFeat(atributosFeatInicial); 
+      setAtributosNivel(atributosNivelInicial);
+      setAtributosRaza(atributosRazaInicial);
+      setSettings(atributosPrincipalesInicial);
+    }
+
     useEffect(() =>{
       actualizarAbilityScoreMaximo();
     },[settings.Nivel]); 
@@ -182,6 +176,7 @@ export const StatFrame = () =>{
             <div> Puntos de nivel disponibles = {settings.BonusNivel}</div>
             <div style={{'color':'red'}}> ¡¡Maximum Ability Score = {settings.AbilityScoreMaximo}!!</div>
           </div>
+          <button className={tableStyle.button_container} onClick= { e => resetElements()}> Resetear Tabla</button>
         </div>
         <div>
           <div>Puntos Disponibles = {settings.PuntosDisponibles} ; Puntos de Nivel Disponibles = {settings.BonusNivel}</div>

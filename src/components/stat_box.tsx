@@ -123,11 +123,11 @@ export const StatBox = (props: any) =>{
                 </td>
 
                 <td>
-                <input type="number" placeholder="Bonus de raza" min = {0} onChange = {e => setAtributosRaza({...atributosRaza, [nombreStat]:Number(e.target.value)})}>
+                <input type="number" placeholder="Bonus de raza" min = {0} value = {atributosRaza[statName]} onChange = {e => setAtributosRaza({...atributosRaza, [nombreStat]:Number(e.target.value)})}>
                 </input>
                 </td>
                 <td>
-                <input type = "number" placeholder="Bonus de Feat" min = {0} onChange = {e => setAtributosFeat({...atributosFeat,[nombreStat]:Number(e.target.value)})}></input>
+                <input type = "number" placeholder="Bonus de Feat" min = {0} value = {atributosFeat[statName]} onChange = {e => setAtributosFeat({...atributosFeat,[nombreStat]:Number(e.target.value)})}></input>
                 </td>
                 <td>
                 <input type="number" placeholder="Bonus de Nivel" min = {0} max = {atributosNivel[statName]+settings.BonusNivel} title = {"bonus de nivel"} value = {atributosNivel[statName].toString()} onChange = {e => setBonusNivelFuncion(Number(e.target.value))}> 
