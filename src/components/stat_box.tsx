@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import calcularPuntosOverflow, { BonusNivelFuncion, calcularPuntosUtilizados, verificarSiUtilizanMasPuntos } from "../utils/statCalculatorModule";
 import rowStyle from "../styles/row.module.css"
-import {Atributos, Personaje} from "./types"
+import {Atributos, Personaje} from "../types/types"
 
 
 export const StatBox = (props: any) =>{

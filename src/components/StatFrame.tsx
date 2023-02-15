@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { StatBox } from "./stat_box";
 import tableStyle from "../styles/table.module.css"
-import {Atributos, Personaje} from "./types"
+import {Atributos, Personaje} from "../types/types"
 
 export const StatFrame = () =>{
     let stats = ["Strenght","Dexterity","Constitution","Intelligence","Wisdom","Charisma","Honor"];
@@ -111,16 +111,18 @@ export const StatFrame = () =>{
 
 
     return (
-      <div className={tableStyle.centered_parent}>
-        <div>Puntos disponibles = </div>
-        <input value={settings.PuntosDisponibles} onChange={e => setSettings({...settings, "PuntosDisponibles":Number(e.target.value)})}></input>
-        <div></div>
-        <br></br>
+      <div className={tableStyle.body_container}>
         <div>
-        Nivel del personaje = <input value = {settings.Nivel} placeholder='Nivel' onChange={e => actualizarBonusNivel(Number(e.target.value))}></input>
+          <div>Puntos disponibles = </div>
+          <input value={settings.PuntosDisponibles} onChange={e => setSettings({...settings, "PuntosDisponibles":Number(e.target.value)})}></input>
+          <div></div>
+          <br></br>
+          <div>
+          Nivel del personaje = <input value = {settings.Nivel} placeholder='Nivel' onChange={e => actualizarBonusNivel(Number(e.target.value))}></input>
+          </div>
+          <div> Bonus de nivel = {settings.BonusNivel}</div>
+          <div style={{'color':'red'}}> ¡¡Maximum Ability Score = {settings.AbilityScoreMaximo}!!</div>
         </div>
-        <div> Bonus de nivel = {settings.BonusNivel}</div>
-        <div style={{'color':'red'}}> ¡¡Maximum Ability Score = {settings.AbilityScoreMaximo}!!</div>
         <div>
           <table id = {"table-id"} className={tableStyle.table_format}>
             <thead>

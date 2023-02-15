@@ -1,13 +1,26 @@
-.centered_parent{
+.body_container{
     text-align: center;
     width: 50%;
-    margin:auto;
-    background: transparent;
+    height:auto;
+    position: center;
+    margin:0 auto;
+    background-color: transparent;
     font-family:OCR A Std, monospace;
-    
   }
-
-
+  
 .table_format{
     border-spacing: 15px;
+    border-color: aqua;
+    border-collapse: collapse;
+    height: 100%;
+}
+
+.table_format thead tr{
+    background-color: transparent;
+    color: black;
+}
+
+.table_format tbody td{
+    background-color: transparent;
+    padding: 10px;
 }

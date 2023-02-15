@@ -1,4 +1,4 @@
-import { Atributos, Personaje } from "../components/types";
+import { Atributos, Personaje } from "../types/types";
 
 
 export default function calcularPuntosOverflow(atributos:Personaje,setAtributos:any,statFinal:number,settings:Atributos,setSettings:any,estadistica_final:number,nombre:string){
