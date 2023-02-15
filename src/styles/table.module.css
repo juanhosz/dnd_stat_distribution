@@ -1,26 +1,92 @@
+
 .body_container{
     text-align: center;
-    width: 50%;
+    width: 100%;
     height:auto;
     position: center;
     margin:0 auto;
     background-color: transparent;
     font-family:OCR A Std, monospace;
+    display: flex;
+    padding-top: 25px;
+    padding-left: 5px;
   }
+
+
+
+.settingsStyle{
+  text-align: left;
+  border-color: black;
+  border-style: double;
+  border-width: 5px;
+  padding: 5px;
+  margin-left: 1rem;
+  height: auto;
+  background-color: rgb(207, 203, 203);
+}
+
+.settingsTitle{
+  color: black;
+  font-style: italic;
+  font-size: 24px;
+  font-weight: bold;
+  margin-left: 10px;
+  background-color: transparent;
+}
+
+.settingsBody{
+  margin-top: 10%;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 40px;
+  background-color: transparent;
   
+}
+.settingsBody input{
+  width: 2rem;
+  justify-content: center;
+  text-align: center;
+  margin-left: 10px;
+}
+
 .table_format{
-    border-spacing: 15px;
-    border-color: aqua;
+    border-spacing: 10px 0;
     border-collapse: collapse;
-    height: 100%;
+    height: auto;
+    margin-left: 100px;
+    border-color: black;
+    border-style: double;
+    border-width: 5px;
+    padding: 5px;
+    width: 50vw;
 }
 
-.table_format thead tr{
-    background-color: transparent;
+.table_format thead{
+  border-bottom: 1px solid black;
+}
+
+.table_format thead tr{ /*Este div controla todo el header de la tabla*/
+  background: rgb(207, 203, 203);
+  background-repeat: no-repeat;
+}
+
+.table_format thead th{ /*Este div controla los titulkos individuales*/
     color: black;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    width: min-content;
 }
 
-.table_format tbody td{
+.table_format tbody td{ /*Este controla cada columna individualmente*/
     background-color: transparent;
     padding: 10px;
+}
+
+.table_format tbody tr:nth-child(even){
+  background: transparent
+}
+
+.table_format tbody tr:nth-child(odd){
+  background: transparent
 }

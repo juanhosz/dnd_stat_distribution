@@ -91,7 +91,7 @@ export const StatBox = (props: any) =>{
     },[estadistica_final])
 
     function setBonusNivelFuncion(stat:any){
-        BonusNivelFuncion(stat,atributosNivel,settings,estadistica_final,setAtributosNivel,setSettings,statName,nombreStat);
+        BonusNivelFuncion(stat,atributosNivel,settings,estadistica_final,setAtributosNivel,setSettings,statName,nombreStat,atributos);
         return;
     }
 

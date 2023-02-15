@@ -112,18 +112,23 @@ export const StatFrame = () =>{
 
     return (
       <div className={tableStyle.body_container}>
-        <div>
-          <div>Puntos disponibles = </div>
-          <input value={settings.PuntosDisponibles} onChange={e => setSettings({...settings, "PuntosDisponibles":Number(e.target.value)})}></input>
-          <div></div>
-          <br></br>
-          <div>
-          Nivel del personaje = <input value = {settings.Nivel} placeholder='Nivel' onChange={e => actualizarBonusNivel(Number(e.target.value))}></input>
+        <div className={tableStyle.settingsStyle}>
+          <div className={tableStyle.settingsTitle}>Settings del Personaje</div>
+          <div className={tableStyle.settingsBody}>
+            <div>
+              Puntos disponibles =  
+              <input value={settings.PuntosDisponibles} onChange={e => setSettings({...settings, "PuntosDisponibles":Number(e.target.value)})}></input>
+            </div>
+            <div>
+              Nivel del personaje = 
+              <input value = {settings.Nivel} placeholder='Nivel' onChange={e => actualizarBonusNivel(Number(e.target.value))}></input>
+            </div>
+            <div> Puntos de nivel disponibles = {settings.BonusNivel}</div>
+            <div style={{'color':'red'}}> ¡¡Maximum Ability Score = {settings.AbilityScoreMaximo}!!</div>
           </div>
-          <div> Bonus de nivel = {settings.BonusNivel}</div>
-          <div style={{'color':'red'}}> ¡¡Maximum Ability Score = {settings.AbilityScoreMaximo}!!</div>
         </div>
         <div>
+          <div>Puntos Disponibles = {settings.PuntosDisponibles} ; Puntos de Nivel Disponibles = {settings.BonusNivel}</div>
           <table id = {"table-id"} className={tableStyle.table_format}>
             <thead>
               <tr>
