@@ -2,13 +2,11 @@ import { useEffect, useState } from "react";
 import { StatBox } from "./stat_box";
 import tableStyle from "../styles/table.module.css"
 import {Atributos, Personaje} from "../types/types"
+import { CharacterSettings } from "./CharacterSettings";
+import { ModalPreview } from "./ModalPreview";
 
 export const StatFrame = () =>{
     let stats = ["Strenght","Dexterity","Constitution","Intelligence","Wisdom","Charisma","Honor"];
-
-
-
-
 
     let atributosInicial : Personaje ={
       "Strenght": 10,
@@ -64,10 +62,6 @@ export const StatFrame = () =>{
       atributosParse = false;
     }
 
-      
-
-
-    const [fueGuarado, setFueGuardado] = useState(false);
     const [atributos, setAtributos] = useState(parser(atributosParse.atributos,atributosInicial));
     const [atributosNivel, setAtributosNivel] = useState(parser(atributosParse.atributosNivel,atributosNivelInicial));
     const [atributosFeat, setAtributosFeat] = useState(parser(atributosParse.atributosFeat,atributosFeatInicial));
@@ -81,40 +75,11 @@ export const StatFrame = () =>{
       return state
     }
 
-
-
-    
-
-
-
-
     let constArray = [[atributos, setAtributos],
     [atributosNivel, setAtributosNivel],
     [atributosFeat, setAtributosFeat],
     [atributosRaza,setAtributosRaza],
     [settings,setSettings]];
-    //const [puntos_disponibles, setPuntosDisponibles] = useState(15)
-  
-    //const[bonusNivel, setbonusNivel] = useState(0)
-
-    //const [nivel,setNivel] = useState(0)
-
-    //const[abilityScoreMaximo, setAbilityScoreMaximo] = useState(30);
-  
-    function actualizarBonusNivel(nivel: number){
-      let puntos_utilizados = 0;
-      for (let i = 1; i < nivel; i++){
-
-        if (i >= 9){
-
-          puntos_utilizados = puntos_utilizados + 2;
-        }
-        else{
-          puntos_utilizados++;
-        }
-      }
-      setSettings({...settings, "BonusNivel":puntos_utilizados,"Nivel": nivel})
-    }
 
     function actualizarAbilityScoreMaximo(){
       if (settings.Nivel <= 5 && settings.Nivel < 14){
@@ -127,14 +92,6 @@ export const StatFrame = () =>{
         setSettings({...settings, "AbilityScoreMaximo":35})
       }
       return;
-    }
-
-    function resetElements(){
-      setAtributos(atributosInicial);
-      setAtributosFeat(atributosFeatInicial); 
-      setAtributosNivel(atributosNivelInicial);
-      setAtributosRaza(atributosRazaInicial);
-      setSettings(atributosPrincipalesInicial);
     }
 
     useEffect(() =>{
@@ -151,33 +108,9 @@ export const StatFrame = () =>{
 
     },[atributos,settings,atributosNivel,atributosFeat,atributosRaza])
 
-    
-
-
-
-
-
-
-
-
     return (
       <div className={tableStyle.body_container}>
-        <div className={tableStyle.settingsStyle}>
-          <div className={tableStyle.settingsTitle}>Settings del Personaje</div>
-          <div className={tableStyle.settingsBody}>
-            <div>
-              Puntos disponibles =  
-              <input value={settings.PuntosDisponibles} onChange={e => setSettings({...settings, "PuntosDisponibles":Number(e.target.value)})}></input>
-            </div>
-            <div>
-              Nivel del personaje = 
-              <input value = {settings.Nivel} placeholder='Nivel' onChange={e => actualizarBonusNivel(Number(e.target.value))}></input>
-            </div>
-            <div> Puntos de nivel disponibles = {settings.BonusNivel}</div>
-            <div style={{'color':'red'}}> ¡¡Maximum Ability Score = {settings.AbilityScoreMaximo}!!</div>
-          </div>
-          <button className={tableStyle.button_container} onClick= { e => resetElements()}> Resetear Tabla</button>
-        </div>
+        <CharacterSettings arrayStats = {constArray}></CharacterSettings>
         <div>
           <div>Puntos Disponibles = {settings.PuntosDisponibles} ; Puntos de Nivel Disponibles = {settings.BonusNivel}</div>
           <table id = {"table-id"} className={tableStyle.table_format}>
@@ -198,8 +131,11 @@ export const StatFrame = () =>{
               </StatBox>)}
             </tbody>
           </table>
+          
         </div>
-        
+        <div className={tableStyle.PreviewContainer}>
+          <ModalPreview arrayStats = {constArray}></ModalPreview>
+        </div>
       </div>
     );
 }

@@ -20,8 +20,6 @@ export const StatBox = (props: any) =>{
     let atributosFeat:Personaje = atributosFeatIni;
     let atributosRaza:Personaje = atributosRazaIni;
 
-    
-
 
     //TODO: Se debe implementar el maximo ability score para el proximo update;
     //TODO:30 a 35 te cuesta 2 y 35 es el cap . en 35 tenes un +14, 31 te cuesta 2
@@ -108,10 +106,6 @@ export const StatBox = (props: any) =>{
     useEffect(() =>{
         calcular_modificador();
     },[estadistica_final, calcular_modificador]);
-
-
-
-
 
     return(
             <tr id = {nombreStat}>

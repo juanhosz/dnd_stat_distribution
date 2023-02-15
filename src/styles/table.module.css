@@ -13,50 +13,6 @@
   }
 
 
-
-.settingsStyle{
-  text-align: left;
-  border-color: black;
-  border-style: double;
-  border-width: 5px;
-  padding: 5px;
-  margin-left: 1rem;
-  height: auto;
-  background-color: rgb(207, 203, 203);
-}
-
-.settingsTitle{
-  color: black;
-  font-style: italic;
-  font-size: 24px;
-  font-weight: bold;
-  margin-left: 10px;
-  background-color: transparent;
-}
-
-.settingsBody{
-  margin-top: 10%;
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-  gap: 40px;
-  background-color: transparent;
-  
-}
-.settingsBody input{
-  width: 2rem;
-  justify-content: center;
-  text-align: center;
-  margin-left: 10px;
-}
-
-.button_container{
-    width: 50%;
-    justify-content: center;
-    margin-left: 15%;
-    margin-top: 5%;
-}
-
 .table_format{
     border-spacing: 10px 0;
     border-collapse: collapse;
@@ -96,4 +52,10 @@
 
 .table_format tbody tr:nth-child(odd){
   background: transparent
+}
+
+.PreviewContainer{
+  width: auto;
+  height: auto;
+  padding: 5%;
 }

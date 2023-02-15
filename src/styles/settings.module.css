@@ -1,0 +1,107 @@
+.settingsStyle{
+    text-align: left;
+    border-color: black;
+    border-style: double;
+    border-width: 5px;
+    padding: 5px;
+    margin-left: 1rem;
+    height: auto;
+    background-color: rgb(207, 203, 203);
+  }
+  
+  .settingsTitle{
+    color: black;
+    font-style: italic;
+    font-size: 24px;
+    font-weight: bold;
+    margin-left: 10px;
+    background-color: transparent;
+  }
+  
+  .settingsBody{
+    margin-top: 10%;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: 40px;
+    background-color: transparent;
+    
+  }
+  .settingsBody input{
+    width: 2rem;
+    justify-content: center;
+    text-align: center;
+    margin-left: 10px;
+  }
+  
+  .button_container{
+      width: 50%;
+      justify-content: center;
+      margin-left: 15%;
+      margin-top: 5%;
+  }
+
+
+
+.modal{
+  position: absolute; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 35vw;
+  top: 20vh;
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  border: 3px black solid;
+}
+
+.modal_title{
+  text-align: center;
+}
+
+.modal_content{
+  width: auto;
+  height: auto;
+  background-color: rgb(37, 179, 179);
+  border: 1px black solid;
+  justify-content: center;
+  text-align: left;
+  padding: 10px;
+
+}
+
+.modal_table{
+  text-align: center;
+  border-spacing: 10px;
+}
+
+.close_modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #252424cc;
+  height: 100%;
+  width: 100vw;
+}
+
+
+.preview_button{
+  display: inline-block;
+  outline: 0;
+  border:0;
+  cursor: pointer;
+  text-decoration: none;
+  position: relative;
+  color: #000;
+  background: #fff;
+  line-height: 30px;
+  border-radius: 40px;
+  padding: 20px;
+  font-size: 30px;
+  font-weight: 600;
+  box-shadow: rgb(255, 198, 0) -2px -2px 0px 2px, rgb(246, 84, 174) 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 0px 2px 7px;
+  transition: all 0.2s;
+  
+}
+.preview_button:hover{
+    box-shadow: rgb(246, 84, 174) -2px -2px 0px 2px, rgb(255, 198, 0) 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 0px 2px 7px;
+    transform: scale(1.01);
+}
