@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/dnd_stat_distribution/static/css/main.547dc3c0.css",
-    "main.js": "/dnd_stat_distribution/static/js/main.84940ae8.js",
+    "main.css": "/dnd_stat_distribution/static/css/main.5d27a4c6.css",
+    "main.js": "/dnd_stat_distribution/static/js/main.9dd1883a.js",
     "static/js/787.28cb0dcd.chunk.js": "/dnd_stat_distribution/static/js/787.28cb0dcd.chunk.js",
     "static/media/canvas.png": "/dnd_stat_distribution/static/media/canvas.944856a13abcc973ce44.png",
     "index.html": "/dnd_stat_distribution/index.html",
-    "main.547dc3c0.css.map": "/dnd_stat_distribution/static/css/main.547dc3c0.css.map",
-    "main.84940ae8.js.map": "/dnd_stat_distribution/static/js/main.84940ae8.js.map",
+    "main.5d27a4c6.css.map": "/dnd_stat_distribution/static/css/main.5d27a4c6.css.map",
+    "main.9dd1883a.js.map": "/dnd_stat_distribution/static/js/main.9dd1883a.js.map",
     "787.28cb0dcd.chunk.js.map": "/dnd_stat_distribution/static/js/787.28cb0dcd.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.547dc3c0.css",
-    "static/js/main.84940ae8.js"
+    "static/css/main.5d27a4c6.css",
+    "static/js/main.9dd1883a.js"
   ]
 }
