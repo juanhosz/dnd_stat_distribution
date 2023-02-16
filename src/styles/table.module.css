@@ -18,19 +18,21 @@
     border-collapse: collapse;
     height: auto;
     margin-left: 100px;
+    margin-top: 10px;
     border-color: black;
-    border-style: double;
     border-width: 5px;
     padding: 5px;
     width: 50vw;
+    border-style: double;
 }
 
 .table_format thead{
   border-bottom: 1px solid black;
+
 }
 
 .table_format thead tr{ /*Este div controla todo el header de la tabla*/
-  background: rgb(207, 203, 203);
+  background:#cfcbcb;
   background-repeat: no-repeat;
 }
 

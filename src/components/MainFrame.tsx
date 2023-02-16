@@ -5,7 +5,7 @@ import {Atributos, Personaje} from "../types/types"
 import { CharacterSettings } from "./CharacterSettings";
 import { ModalPreview } from "./ModalPreview";
 
-export const StatFrame = () =>{
+export const MainFrame = () =>{
     let stats = ["Strenght","Dexterity","Constitution","Intelligence","Wisdom","Charisma","Honor"];
 
     let atributosInicial : Personaje ={

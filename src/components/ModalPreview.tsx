@@ -1,5 +1,5 @@
 import { useState } from "react"
-import settingsStyle from '../styles/settings.module.css'
+import modalModule from '../styles/modal.module.css'
 import { Atributos, Personaje } from "../types/types";
 
 export function ModalPreview(props:any){
@@ -55,11 +55,11 @@ export function ModalPreview(props:any){
     <div>
         {isOpen && 
             <div>
-            <div className={settingsStyle.close_modal} onClick = {e => setisOpen(false)}></div>
-            <div className={settingsStyle.modal}>
-                <div className={settingsStyle.modal_content}>
-                    <div className={settingsStyle.modal_title}>Preview de las stats</div>
-                    <table className={settingsStyle.modal_table}>
+            <div className={modalModule.close_modal} onClick = {e => setisOpen(false)}></div>
+            <div className={modalModule.modal}>
+                <div className={modalModule.modal_content}>
+                    <div className={modalModule.modal_title}>Preview de las stats</div>
+                    <table className={modalModule.modal_table}>
                         <thead>
                             <tr>
                                 <th>Stat</th>
@@ -77,7 +77,7 @@ export function ModalPreview(props:any){
             </div>
             </div>}
 
-        <button className = {settingsStyle.preview_button}onClick={e => (setisOpen(true))}>
+        <button className = {modalModule.preview_button}onClick={e => (setisOpen(true))}>
             Preview
         </button>
     </div>    

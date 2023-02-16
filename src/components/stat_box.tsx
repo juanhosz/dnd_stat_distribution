@@ -39,7 +39,7 @@ export const StatBox = (props: any) =>{
         let ptos_disponibles = Number(settings.PuntosDisponibles);
 
         if ( statFinal> atributos[statName] && Math.abs(verificarSiUtilizanMasPuntos(atributos[statName],statFinal)) > ptos_disponibles){
-            calcularPuntosOverflow(atributos,setAtributos,statFinal,settings,setSettings,estadistica_final,nombreStat);
+            calcularPuntosOverflow(atributos,setAtributos,statFinal,settings,setSettings,estadistica_final,nombreStat,atributosNivel);
             return;
             
         }

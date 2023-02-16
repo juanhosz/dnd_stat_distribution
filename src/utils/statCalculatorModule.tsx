@@ -1,29 +1,27 @@
 import { Atributos, Personaje } from "../types/types";
 
 
-export default function calcularPuntosOverflow(atributos:Personaje,setAtributos:any,statFinal:number,settings:Atributos,setSettings:any,estadistica_final:number,nombre:string){
+export default function calcularPuntosOverflow(atributos:Personaje,setAtributos:any,statFinal:number,settings:Atributos,setSettings:any,estadistica_final:number,nombre:string,atributosNivel:Personaje){
     let statName = nombre as keyof Personaje;
     let statInicial = atributos[statName]
-    let [numero_maximo,puntos_utilizados] = calcularStatFinalMaximo(statInicial,statFinal,settings.PuntosDisponibles,settings.AbilityScoreMaximo);
+    let [numero_maximo,puntos_utilizados] = calcularStatFinalMaximo(statInicial,statFinal,settings.PuntosDisponibles,settings.AbilityScoreMaximo,atributosNivel[statName]);
     //*let [ptos_utilizados,puntos_adicionales] = calcularPuntosUtilizados(statFinal,numero_maximo,settings.AbilityScoreMaximo,estadistica_final);
     setSettings({...settings, "PuntosDisponibles":settings.PuntosDisponibles + puntos_utilizados});
     setAtributos({...atributos, [nombre]:numero_maximo});
     return
 }
 
-export function calcularStatFinalMaximo(inicial:any, final:any,puntosDisponibles:number,maximo:number){
+export function calcularStatFinalMaximo(inicial:any, final:any,puntosDisponibles:number,maximo:number,atributoNivel:number){
     let puntos_utilizados = 0;
     let numero_actual = 0;
+    let puntos_adicionales = 0;
     let ptos_disponibles = puntosDisponibles;
     for (let i = inicial; i< final;i++){
         numero_actual = i;
-        if (numero_actual === maximo){
-            return [Number(numero_actual),-puntos_utilizados]
+        if (inicial + atributoNivel + puntos_adicionales === maximo || puntos_utilizados === ptos_disponibles){
+            return [i,-puntos_utilizados]
         }
-        if (puntos_utilizados === ptos_disponibles){
-            return [i,-puntos_utilizados];
-        }
-        if (i >= 13){
+        if (i >= 13 || inicial + atributoNivel + puntos_adicionales > 30){
             if (puntos_utilizados + 2 > ptos_disponibles){
                 return [i,-puntos_utilizados];
             }
@@ -32,6 +30,7 @@ export function calcularStatFinalMaximo(inicial:any, final:any,puntosDisponibles
         else{
             puntos_utilizados++;
         }
+        puntos_adicionales++;
     }
     return [Number(numero_actual),-puntos_utilizados];
 }
