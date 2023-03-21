@@ -6,12 +6,20 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  min-height: 100vh;
+  min-height: auto;
+  min-width: 100vw;
+  width: 100vw;
   padding: 0;
-
+  background-color: transparent;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+#root{
+  margin:0;
+  padding: 0;
+}
+

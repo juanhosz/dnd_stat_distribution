@@ -20,10 +20,6 @@ export const StatBox = (props: any) =>{
     let atributosFeat:Personaje = atributosFeatIni;
     let atributosRaza:Personaje = atributosRazaIni;
 
-
-    //TODO: Se debe implementar el maximo ability score para el proximo update;
-    //TODO:30 a 35 te cuesta 2 y 35 es el cap . en 35 tenes un +14, 31 te cuesta 2
-    //TODO:nivel 5 incluido no podes pasarte de 20  y en 14 podes poner puntos mas alla de 30
     
     //const [statInicial,setStatInicial] = useState(10); //* Numero de los stats al distribuir
     const [estadistica_final,setEstadisticaFinal] = useState(atributos[statName] + atributosFeat[statName] + atributosNivel[statName]+ atributosRaza[statName]); //* Numero que indica el ability score final

@@ -1,8 +1,8 @@
 .body_background{
     display: flex;
     flex-direction: column; 
-    min-height: 100vh;
-    height: 100vh;
-    padding: 0;   
+    min-height: auto;
+    height: 100%; 
+    width: 100vw;
     background-repeat: no-repeat;
 }

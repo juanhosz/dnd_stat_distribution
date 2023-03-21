@@ -75,8 +75,8 @@ export function ModalPreview(props:any){
                 <button onClick={ e => setisOpen(false)}> Close</button>
                 </div>
             </div>
-            </div>}
-
+            </div>
+        }
         <button className = {modalModule.preview_button}onClick={e => (setisOpen(true))}>
             Preview
         </button>
