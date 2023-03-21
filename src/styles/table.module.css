@@ -16,13 +16,13 @@
 .table_format{
     border-spacing: 10px 0;
     border-collapse: collapse;
-    height: auto;
+    height: max-content;
     margin-left: 100px;
     margin-top: 10px;
     border-color: black;
     border-width: 5px;
     padding: 5px;
-    width: 50vw;
+    width: 40vw;
     border-style: double;
 }
 

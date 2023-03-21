@@ -107,21 +107,25 @@ export const StatBox = (props: any) =>{
             <tr id = {nombreStat}>
                 <td className={rowStyle.stat_name}>{nombreStat}</td>
 
-                <td><input className={rowStyle.caracteristica_input} type="number" placeholder="Estadisticas iniciales" min={0} value = {atributos[statName].toString()} onChange = {e => setear_caracteristica(e)}
-                onKeyDown = {(event) => {setear_caracteristica(event)}}>
+                <td><input className={rowStyle.inputBar} type="number"  inputMode= "numeric" placeholder="Estadisticas iniciales" min={0} 
+                        value = {atributos[statName].toString()} onChange = {e => setear_caracteristica(e)} onKeyDown = {(event) => {setear_caracteristica(event)}}>
                 </input>
                 </td>
 
                 <td>
-                <input type="number" placeholder="Bonus de raza" min = {0} value = {atributosRaza[statName]} onChange = {e => setAtributosRaza({...atributosRaza, [nombreStat]:Number(e.target.value)})}>
-                </input>
+                    <input className = {rowStyle.inputBar} inputMode= "numeric" type="number" placeholder="Bonus de raza" min = {0} 
+                        value = {atributosRaza[statName].toString()} onChange = {e => setAtributosRaza({...atributosRaza, [nombreStat]:Number(e.target.value)})}>
+                    </input>
                 </td>
                 <td>
-                <input type = "number" placeholder="Bonus de Feat" min = {0} value = {atributosFeat[statName]} onChange = {e => setAtributosFeat({...atributosFeat,[nombreStat]:Number(e.target.value)})}></input>
-                </td>
+                    <input  className = {rowStyle.inputBar} inputMode = "numeric" type = "number" placeholder="Bonus de Feat" min = {0} 
+                        value = {atributosFeat[statName].toString()} onChange = {e => setAtributosFeat({...atributosFeat,[nombreStat]:Number(e.target.value)})}></input>
+                    </td>
                 <td>
-                <input type="number" placeholder="Bonus de Nivel" min = {0} max = {atributosNivel[statName]+settings.BonusNivel} title = {"bonus de nivel"} value = {atributosNivel[statName].toString()} onChange = {e => setBonusNivelFuncion(Number(e.target.value))}> 
-                </input>
+                    <input className = {rowStyle.inputBar} inputMode= "numeric" type="number" placeholder="Bonus de Nivel" min = {0} 
+                        max = {atributosNivel[statName]+settings.BonusNivel} title = {"bonus de nivel"} 
+                        value = {atributosNivel[statName].toString()} onChange = {e => setBonusNivelFuncion(Number(e.target.value))}> 
+                    </input>
                 </td>
 
                 <td>

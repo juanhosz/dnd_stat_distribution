@@ -100,6 +100,7 @@ export function CharacterSettings(props:any){
       </div>
       <div> Puntos de nivel disponibles = {settings.BonusNivel}</div>
       <div style={{'color':'red'}}> ¡¡Maximum Ability Score = {settings.AbilityScoreMaximo}!!</div>
+      <div style = {{'color':'purple'}}>{"¡Hay debuffs con stats menores a 7!"} </div>
     </div>
     <button className={settingsModule.button_container} onClick= { e => resetElements()}> Resetear Datos</button>
   </div>
