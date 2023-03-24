@@ -35,13 +35,16 @@ export const StatBox = (props: any) =>{
         let ptos_disponibles = Number(settings.PuntosDisponibles);
 
         if ( statFinal> atributos[statName] && Math.abs(verificarSiUtilizanMasPuntos(atributos[statName],statFinal)) > ptos_disponibles){
+
             calcularPuntosOverflow(atributos,setAtributos,statFinal,settings,setSettings,estadistica_final,nombreStat,atributosNivel);
             return;
             
         }
 
         if (statFinal > 13 || (atributos[statName] === 14)){
+
             if (ptos_disponibles < 2 && statFinal> atributos[statName]){
+
                 console.log("No hay puntos suficientes");
                 return;
             }
@@ -51,7 +54,6 @@ export const StatBox = (props: any) =>{
             console.log("No hay puntos disponbiles");
             return;
         };
-
         let [puntos_utilizados,puntos_adicionales] = calcularPuntosUtilizados(atributos[statName],statFinal,settings.AbilityScoreMaximo,estadistica_final);
         setSettings({...settings, "PuntosDisponibles":ptos_disponibles + puntos_utilizados});
         setAtributos({...atributos, [nombreStat]: atributos[statName]+puntos_adicionales});

@@ -4,25 +4,25 @@ import { Atributos, Personaje } from "../types/types";
 export default function calcularPuntosOverflow(atributos:Personaje,setAtributos:any,statFinal:number,settings:Atributos,setSettings:any,estadistica_final:number,nombre:string,atributosNivel:Personaje){
     let statName = nombre as keyof Personaje;
     let statInicial = atributos[statName]
-    let [numero_maximo,puntos_utilizados] = calcularStatFinalMaximo(statInicial,statFinal,settings.PuntosDisponibles,settings.AbilityScoreMaximo,atributosNivel[statName]);
+    let [numero_maximo,puntos_utilizados] = calcularStatFinalMaximo(statInicial,statFinal,settings.PuntosDisponibles,settings.AbilityScoreMaximo,atributosNivel[statName],estadistica_final);
     //*let [ptos_utilizados,puntos_adicionales] = calcularPuntosUtilizados(statFinal,numero_maximo,settings.AbilityScoreMaximo,estadistica_final);
     setSettings({...settings, "PuntosDisponibles":settings.PuntosDisponibles + puntos_utilizados});
     setAtributos({...atributos, [nombre]:numero_maximo});
     return
 }
 
-export function calcularStatFinalMaximo(inicial:any, final:any,puntosDisponibles:number,maximo:number,atributoNivel:number){
+export function calcularStatFinalMaximo(inicial:any, final:any,puntosDisponibles:number,maximo:number,atributoNivel:number, estadistica_final:number){
     let puntos_utilizados = 0;
     let numero_actual = 0;
     let puntos_adicionales = 0;
     let ptos_disponibles = puntosDisponibles;
     for (let i = inicial; i< final;i++){
         numero_actual = i;
-        if (inicial + atributoNivel + puntos_adicionales === maximo || puntos_utilizados === ptos_disponibles){
+        if (estadistica_final + puntos_adicionales === maximo || puntos_utilizados === ptos_disponibles){
             return [i,-puntos_utilizados]
         }
-        if (i >= 13 || inicial + atributoNivel + puntos_adicionales > 30){
-            if (puntos_utilizados + 2 > ptos_disponibles){
+        if (i >= 13 || estadistica_final + puntos_adicionales > 30){
+            if (puntos_utilizados + 2 > ptos_disponibles || (puntos_utilizados +2 > ptos_disponibles && estadistica_final + puntos_adicionales == maximo)){
                 return [i,-puntos_utilizados];
             }
             puntos_utilizados = puntos_utilizados + 2;
@@ -103,10 +103,10 @@ export function verificarSiUtilizanMasPuntos(inicial: number, final: number){
 }
 
 export  function BonusNivelFuncion(stat:any,
-    atributosNivel:Personaje,
-    settings:Atributos,
-    estadistica_final:number,
-    setAtributosNivel:any,setSettings:any,statName:keyof Personaje, nombreStat:string, atributos:Personaje){
+                atributosNivel:Personaje,
+                settings:Atributos,
+                estadistica_final:number,
+                setAtributosNivel:any,setSettings:any,statName:keyof Personaje, nombreStat:string, atributos:Personaje){
     let bonus_final = Number(stat);
     let bonus_inicial = Number(atributosNivel[statName]);
     let ptos_disponibles = Number(settings.BonusNivel);
@@ -118,7 +118,7 @@ export  function BonusNivelFuncion(stat:any,
         }
         
         for (let i = bonus_inicial; i < bonus_final;i++){
-            if (atributos[statName] + atributosNivel[statName] + puntos_adicionales === settings.AbilityScoreMaximo || //?Condicion si se llega al maximo ability score
+            if (estadistica_final + puntos_adicionales === settings.AbilityScoreMaximo || //?Condicion si se llega al maximo ability score
                 puntos_utilizados === ptos_disponibles || //? Condicion si se utilizan todos los puntos disponibles
                 (settings.AbilityScoreMaximo === 35 && atributos[statName] + atributosNivel[statName] + puntos_adicionales >= 30 && puntos_utilizados + 2 > ptos_disponibles)){ 
                 //?Condicion si se llega al maximo ability score y no hay puntos disponibles
@@ -126,7 +126,7 @@ export  function BonusNivelFuncion(stat:any,
                 setSettings({...settings, "BonusNivel":ptos_disponibles-puntos_utilizados});
                 return;
             }
-            if (settings.AbilityScoreMaximo === 35 && atributos[statName] + atributosNivel[statName] + puntos_adicionales >= 30){
+            if (settings.AbilityScoreMaximo === 35 && estadistica_final + puntos_adicionales >= 30){
                 puntos_utilizados = puntos_utilizados +2;
             }
             else{
@@ -141,7 +141,7 @@ export  function BonusNivelFuncion(stat:any,
     }
     else{
         for (let i = bonus_inicial; i > bonus_final;i--){
-            if (atributos[statName] + atributosNivel[statName] - puntos_adicionales> 30){
+            if (estadistica_final - puntos_adicionales> 30){
                 puntos_utilizados = puntos_utilizados + 2;
             }
             else{
