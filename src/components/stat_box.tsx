@@ -82,6 +82,39 @@ export const StatBox = (props: any) =>{
         return;
     }
 
+    function setBonusRazaYFeat(stat:any,nombre:string){
+        let statInicial;
+        let statFinal = Number(stat);
+        if (nombre === "FEAT"){
+            statInicial = atributosFeat[statName]
+        }
+        else{
+            statInicial = atributosRaza[statName]
+        }
+        let suma = 0;
+        if (statInicial < statFinal){
+            for (let i = statInicial; i < statFinal; i++){
+
+                if (suma + estadistica_final >= settings.AbilityScoreMaximo){
+                    break;
+                }
+                suma++;
+            }
+        }
+        else{
+            for (let i = statInicial; i > statFinal ; i--){
+                suma--;
+            }
+        }
+        if (nombre === "FEAT"){
+            setAtributosFeat({...atributosFeat, [nombreStat]:Number(statInicial+suma)})
+            return;
+        }
+        else{
+            setAtributosRaza({...atributosRaza, [nombreStat]:Number(statInicial + suma)});
+            return;
+        }
+    }
 
     function modificador_positivo(){
         if (modificadorAbilidad >= 0) return true;
@@ -108,12 +141,12 @@ export const StatBox = (props: any) =>{
 
                 <td>
                     <input className = {rowStyle.inputBar} inputMode= "numeric" type="number" placeholder="Bonus de raza" min = {0} 
-                        value = {atributosRaza[statName].toString()} onChange = {e => setAtributosRaza({...atributosRaza, [nombreStat]:Number(e.target.value)})}>
+                        value = {atributosRaza[statName].toString()} onChange = {e => setBonusRazaYFeat(e.target.value,"RAZA")}>
                     </input>
                 </td>
                 <td>
                     <input  className = {rowStyle.inputBar} inputMode = "numeric" type = "number" placeholder="Bonus de Feat" min = {0} 
-                        value = {atributosFeat[statName].toString()} onChange = {e => setAtributosFeat({...atributosFeat,[nombreStat]:Number(e.target.value)})}></input>
+                        value = {atributosFeat[statName].toString()} onChange = {e => setBonusRazaYFeat(e.target.value,"FEAT")}></input>
                     </td>
                 <td>
                     <input className = {rowStyle.inputBar} inputMode= "numeric" type="number" placeholder="Bonus de Nivel" min = {0} 
