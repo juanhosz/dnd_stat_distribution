@@ -64,8 +64,18 @@ export const StatBox = (props: any) =>{
     const calcular_modificador = useCallback(() =>{
         let puntos = 0;
         if (estadistica_final === 35){
-            setModificador(14);
+                setModificador(14);
             return;
+        }
+        if (estadistica_final > 35){
+            let stat = estadistica_final -35;
+            let suma = 0;
+            for (let i = 0; i < stat; i++){
+                suma++;
+            }
+            console.log(stat)
+            setModificador(14+ Math.floor(stat/2));
+            return
         }
         if(estadistica_final === 10){
             setModificador(0);
