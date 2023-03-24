@@ -4,10 +4,10 @@ import { Atributos, Personaje } from "../types/types";
 export default function calcularPuntosOverflow(atributos:Personaje,setAtributos:any,statFinal:number,settings:Atributos,setSettings:any,estadistica_final:number,nombre:string,atributosNivel:Personaje){
     let statName = nombre as keyof Personaje;
     let statInicial = atributos[statName]
-    let [numero_maximo,puntos_utilizados] = calcularStatFinalMaximo(statInicial,statFinal,settings.PuntosDisponibles,settings.AbilityScoreMaximo,atributosNivel[statName],estadistica_final);
+    let [puntosUtilizados,puntosAdicionales] = calcularPuntosAGastar(statInicial,statFinal,settings.AbilityScoreMaximo,settings.PuntosDisponibles,estadistica_final)
     //*let [ptos_utilizados,puntos_adicionales] = calcularPuntosUtilizados(statFinal,numero_maximo,settings.AbilityScoreMaximo,estadistica_final);
-    setSettings({...settings, "PuntosDisponibles":settings.PuntosDisponibles + puntos_utilizados});
-    setAtributos({...atributos, [nombre]:numero_maximo});
+    setSettings({...settings, "PuntosDisponibles":settings.PuntosDisponibles + puntosUtilizados});
+    setAtributos({...atributos, [nombre]:statFinal+puntosUtilizados});
     return
 }
 
@@ -165,3 +165,65 @@ export  function BonusNivelFuncion(stat:any,
 //         return bonus_final;
 //     }
 // }
+
+
+
+
+
+export function calcularPuntosAGastar(inicial:number,final:number,maximo:number, puntosDisponibles:number,estadisticaFinal:number){
+    let puntosAGastar = 0;
+    let puntosDevueltos = 0;
+    let puntosASumar  = 0;
+    let puntosARestar = 0;
+    if (inicial <= final){
+        for (let i = inicial; i < comprararFinalYMaximo((final-inicial)+ estadisticaFinal,maximo,final); i++){
+            if (puntosDisponibles < puntosAGastar + 2 || puntosDisponibles < puntosAGastar + 1){
+                return [-puntosAGastar,puntosASumar];
+            }
+            if (estadisticaFinal + puntosASumar == maximo){
+                return [-puntosAGastar,puntosASumar];
+            }
+            if (i >= 13 || (estadisticaFinal >= 13 && i > 13)){
+                
+                puntosAGastar = puntosAGastar + 2;
+            }
+            else{
+
+                puntosAGastar++;
+            }
+
+            puntosASumar++;
+        }
+        
+        return [-puntosAGastar,puntosASumar];
+    }
+    else{
+        for (let i = inicial; i > final; i--){
+            if (i > 13 || (estadisticaFinal > 13 && i > 13)){
+                
+                puntosDevueltos = puntosDevueltos + 2;
+            }
+            else{
+                
+                puntosDevueltos++;
+            }
+
+            puntosARestar--;
+        }
+        return [puntosDevueltos,puntosARestar];
+    }
+
+}
+
+
+function comprararFinalYMaximo(final:number,maximo:number,finalNumber:number){
+    if (final > maximo){
+        return maximo;
+    }
+    return finalNumber;
+}
+
+function calcularPuntosAgregados(statInicial:number,statFinal:number,estadisticaFinal:number,puntosDisponibles:number, maximo:number){
+    let [puntosAGastar,puntosASumar] = calcularPuntosAGastar(statInicial,statFinal,maximo,puntosDisponibles,estadisticaFinal);
+
+}

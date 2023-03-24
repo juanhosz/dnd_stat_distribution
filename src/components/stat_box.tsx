@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import calcularPuntosOverflow, { BonusNivelFuncion, calcularPuntosUtilizados, verificarSiUtilizanMasPuntos } from "../utils/statCalculatorModule";
+import calcularPuntosOverflow, { BonusNivelFuncion, calcularPuntosAGastar, verificarSiUtilizanMasPuntos } from "../utils/statCalculatorModule";
 import rowStyle from "../styles/row.module.css"
 import {Atributos, Personaje} from "../types/types"
 
@@ -33,30 +33,12 @@ export const StatBox = (props: any) =>{
 
         let statFinal = Number(stat.target.value);
         let ptos_disponibles = Number(settings.PuntosDisponibles);
-
-        if ( statFinal> atributos[statName] && Math.abs(verificarSiUtilizanMasPuntos(atributos[statName],statFinal)) > ptos_disponibles){
-
-            calcularPuntosOverflow(atributos,setAtributos,statFinal,settings,setSettings,estadistica_final,nombreStat,atributosNivel);
-            return;
-            
+        if (statFinal > settings.AbilityScoreMaximo){
+            statFinal = settings.AbilityScoreMaximo;
         }
-
-        if (statFinal > 13 || (atributos[statName] === 14)){
-
-            if (ptos_disponibles < 2 && statFinal> atributos[statName]){
-
-                console.log("No hay puntos suficientes");
-                return;
-            }
-        };
-
-        if(ptos_disponibles <= 0 && statFinal> atributos[statName]){
-            console.log("No hay puntos disponbiles");
-            return;
-        };
-        let [puntos_utilizados,puntos_adicionales] = calcularPuntosUtilizados(atributos[statName],statFinal,settings.AbilityScoreMaximo,estadistica_final);
-        setSettings({...settings, "PuntosDisponibles":ptos_disponibles + puntos_utilizados});
-        setAtributos({...atributos, [nombreStat]: atributos[statName]+puntos_adicionales});
+        let [puntosUtilizados,puntosAdicionales] = calcularPuntosAGastar(atributos[statName],statFinal,settings.AbilityScoreMaximo,settings.PuntosDisponibles,estadistica_final)
+        setSettings({...settings, "PuntosDisponibles":ptos_disponibles + puntosUtilizados});
+        setAtributos({...atributos, [nombreStat]: atributos[statName]+puntosAdicionales});
         return;
 
     }
@@ -73,7 +55,6 @@ export const StatBox = (props: any) =>{
             for (let i = 0; i < stat; i++){
                 suma++;
             }
-            console.log(stat)
             setModificador(14+ Math.floor(stat/2));
             return
         }
@@ -100,6 +81,7 @@ export const StatBox = (props: any) =>{
         BonusNivelFuncion(stat,atributosNivel,settings,estadistica_final,setAtributosNivel,setSettings,statName,nombreStat,atributos);
         return;
     }
+
 
     function modificador_positivo(){
         if (modificadorAbilidad >= 0) return true;
