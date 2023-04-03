@@ -75,6 +75,7 @@ export function CharacterSettings(props:any){
           }
         }
         setSettings({...settings, "BonusNivel":puntos_utilizados,"Nivel": nivel})
+        setAtributosNivel(atributosNivelInicial);
       }
 
       function resetElements(){

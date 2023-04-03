@@ -46,15 +46,20 @@ export function verificarSiMaximoFinal(final:number,maximo:number){
 export function calcularPuntosUtilizados(inicial:any,final:any,maximo:number, estadistica_final:any){
     let puntos_utilizados = 0;
     let puntos_adicionales = 0;
+
     if (inicial < final){
+        
         for (let i = inicial; i< final;i++){
             if (estadistica_final + puntos_adicionales === maximo){
+                
                 return [Number(puntos_utilizados),puntos_adicionales];
             }
             if (estadistica_final + puntos_adicionales >= 13 && i >= 13){
+                
                 puntos_utilizados = puntos_utilizados - 2;
             }
             else{
+                
                 puntos_utilizados--;
             }
             puntos_adicionales++;
@@ -177,7 +182,10 @@ export function calcularPuntosAGastar(inicial:number,final:number,maximo:number,
     let puntosARestar = 0;
     if (inicial <= final){
         for (let i = inicial; i < comprararFinalYMaximo((final-inicial)+ estadisticaFinal,maximo,final); i++){
-            if (puntosDisponibles < puntosAGastar + 2 || puntosDisponibles < puntosAGastar + 1){
+            if (puntosDisponibles < puntosAGastar + 2 && (i >= 13 || (estadisticaFinal >= 13 && i > 13))){
+                return [-puntosAGastar,puntosASumar];
+            }
+            if (puntosDisponibles < puntosAGastar +1){
                 return [-puntosAGastar,puntosASumar];
             }
             if (estadisticaFinal + puntosASumar == maximo){
