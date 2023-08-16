@@ -133,17 +133,13 @@ export  function BonusNivelFuncion(stat:any,
         for (let i = bonus_inicial; i < bonus_final ;i++){
 
             if (estadistica_final == 30){
-                console.log(puntos_adicionales)
                 break;
             }
             
             if (estadistica_final + puntos_adicionales == 30){
-
-
                 break
             }
             if( puntos_utilizados +1 > ptos_disponibles){
-                console.log(puntos_adicionales)
                 break
             }
 
@@ -205,23 +201,25 @@ export  function BonusNivelFuncionLegendario(stat:any,
             if (estadistica_final == 35){
                 break;
             }
-            if (puntos_utilizados == ptos_disponibles){
-                break;
-            }
             if (estadistica_final + puntos_adicionales < 30){
+                console.log("asd")
                 puntos_utilizados ++;
             }
-            if (estadistica_final + puntos_adicionales + 1 >= 35){
+            if (estadistica_final + puntos_adicionales + 1 > 35){
                 break
             }
-            if (puntos_utilizados >= ptos_disponibles){
+            if (puntos_utilizados > ptos_disponibles){
                 break
             }
             if (estadistica_final + puntos_adicionales ==35){
                 break
             }
             if (estadistica_final + puntos_adicionales >= 30){
-                if (estadistica_final + puntos_adicionales + 1 >= 35){
+                if (estadistica_final + puntos_adicionales + 1 > 35){
+                    break
+                }
+                if (puntos_utilizados + 2 > ptos_disponibles){
+                    
                     break
                 }
                 puntos_utilizados = puntos_utilizados + 2
@@ -230,12 +228,8 @@ export  function BonusNivelFuncionLegendario(stat:any,
             puntos_adicionales++;
         }
 
-        if (estadistica_final == 30 && !estado ){
-            return
-        }
-
         if (estado){
-            setAtributosNivel({...atributosNivel, [nombreStat]:bonus_final})
+            setAtributosNivel({...atributosNivel, [nombreStat]:bonus_inicial + puntos_adicionales})
             setSettings({...settings, "PuntosDisponiblesLegend":ptos_disponibles-puntos_utilizados});
             return
         }
