@@ -129,10 +129,12 @@ export  function BonusNivelFuncion(stat:any,
             setAtributosNivel({...atributosNivel, [nombreStat]:bonus_inicial});
             return
         }
-        
+        if (estadistica_final == 30){
+            return
+        }
         for (let i = bonus_inicial; i < bonus_final ;i++){
 
-            if (estadistica_final == 30){
+            if (estadistica_final >= 30){
                 break;
             }
             
