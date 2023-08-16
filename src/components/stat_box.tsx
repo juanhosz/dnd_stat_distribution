@@ -33,7 +33,9 @@ export const StatBox = (props: any) =>{
 
 
     function setear_caracteristica(stat:any){
-
+        if (estadistica_final >= 30){
+            return
+        }
         let statFinal = Number(stat.target.value);
         let ptos_disponibles = Number(settings.PuntosDisponibles);
         if (statFinal > settings.AbilityScoreMaximo){
