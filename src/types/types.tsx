@@ -14,5 +14,6 @@ export interface Atributos{
     "Nivel": number;
     "BonusNivel": number;
     "PuntosDisponibles": number;
+    "PuntosDisponiblesLegend": number;
 
 }

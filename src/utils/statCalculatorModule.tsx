@@ -107,44 +107,58 @@ export function verificarSiUtilizanMasPuntos(inicial: number, final: number){
     return Number(puntos_utilizados);
 }
 
+
 export  function BonusNivelFuncion(stat:any,
                 atributosNivel:Personaje,
                 settings:Atributos,
                 estadistica_final:number,
-                setAtributosNivel:any,setSettings:any,statName:keyof Personaje, nombreStat:string, atributos:Personaje){
+                setAtributosNivel:any,setSettings:any,statName:keyof Personaje, nombreStat:string, atributos:Personaje,
+                estado:boolean){
     let bonus_final = Number(stat);
     let bonus_inicial = Number(atributosNivel[statName]);
     let ptos_disponibles = Number(settings.BonusNivel);
+    if (estado){
+
+        ptos_disponibles = Number(settings.PuntosDisponiblesLegend)
+    }
     let puntos_utilizados = 0;
     let puntos_adicionales = 0;
     if (bonus_final > bonus_inicial){
         if (ptos_disponibles === 0){
+
             setAtributosNivel({...atributosNivel, [nombreStat]:bonus_inicial});
+            return
         }
         
-        for (let i = bonus_inicial; i < bonus_final;i++){
-            if (estadistica_final + puntos_adicionales === settings.AbilityScoreMaximo || //?Condicion si se llega al maximo ability score
-                puntos_utilizados === ptos_disponibles || //? Condicion si se utilizan todos los puntos disponibles
-                (settings.AbilityScoreMaximo === 35 && atributos[statName] + atributosNivel[statName] + puntos_adicionales >= 30 && puntos_utilizados + 2 > ptos_disponibles)){ 
-                //?Condicion si se llega al maximo ability score y no hay puntos disponibles
-                setAtributosNivel({...atributosNivel, [nombreStat]:bonus_inicial+puntos_adicionales});
-                setSettings({...settings, "BonusNivel":ptos_disponibles-puntos_utilizados});
-                return;
+        for (let i = bonus_inicial; i < bonus_final ;i++){
+
+            if (estadistica_final == 30){
+                console.log(puntos_adicionales)
+                break;
             }
-            if (settings.AbilityScoreMaximo === 35 && estadistica_final + puntos_adicionales >= 30){
-                puntos_utilizados = puntos_utilizados +2;
+            
+            if (estadistica_final + puntos_adicionales == 30){
+
+
+                break
             }
-            else{
-                puntos_utilizados++;
+            if( puntos_utilizados +1 > ptos_disponibles){
+                console.log(puntos_adicionales)
+                break
             }
+
             puntos_adicionales++;
+            puntos_utilizados++;
             
         }
-        setAtributosNivel({...atributosNivel, [nombreStat]:bonus_final})
+        
+
+        setAtributosNivel({...atributosNivel, [nombreStat]:bonus_inicial + puntos_adicionales})
         setSettings({...settings, "BonusNivel":ptos_disponibles-puntos_utilizados});
         return
     }
     else{
+
         for (let i = bonus_inicial; i > bonus_final;i--){
             if (estadistica_final - puntos_adicionales> 30){
                 puntos_utilizados = puntos_utilizados + 2;
@@ -155,10 +169,102 @@ export  function BonusNivelFuncion(stat:any,
             puntos_adicionales++
             
         }
+        if (estado){
+            setAtributosNivel({...atributosNivel, [nombreStat]:bonus_final});
+            setSettings({...settings, "PuntosDisponiblesLegend":ptos_disponibles+puntos_utilizados});
+            return
+        }
         setAtributosNivel({...atributosNivel, [nombreStat]:bonus_final});
         setSettings({...settings, "BonusNivel":ptos_disponibles+puntos_utilizados});
         return
     }
+
+}
+
+export  function BonusNivelFuncionLegendario(stat:any,
+    atributosNivel:Personaje,
+    settings:Atributos,
+    estadistica_final:number,
+    setAtributosNivel:any,setSettings:any,statName:keyof Personaje, nombreStat:string, atributos:Personaje,
+    estado:boolean){
+    let bonus_final = Number(stat);
+    let bonus_inicial = Number(atributosNivel[statName]);
+    let ptos_disponibles = Number(settings.BonusNivel);
+    if (estado){
+        ptos_disponibles = Number(settings.PuntosDisponiblesLegend)
+    }
+    let puntos_utilizados = 0;
+    let puntos_adicionales = 0;
+    if (bonus_final > bonus_inicial && estado){
+        if (ptos_disponibles === 0){
+            setAtributosNivel({...atributosNivel, [nombreStat]:bonus_inicial});
+            return
+        }
+
+        for (let i = bonus_inicial; i < bonus_final ;i++){
+            if (estadistica_final == 35){
+                break;
+            }
+            if (puntos_utilizados == ptos_disponibles){
+                break;
+            }
+            if (estadistica_final + puntos_adicionales < 30){
+                puntos_utilizados ++;
+            }
+            if (estadistica_final + puntos_adicionales + 1 >= 35){
+                break
+            }
+            if (puntos_utilizados >= ptos_disponibles){
+                break
+            }
+            if (estadistica_final + puntos_adicionales ==35){
+                break
+            }
+            if (estadistica_final + puntos_adicionales >= 30){
+                if (estadistica_final + puntos_adicionales + 1 >= 35){
+                    break
+                }
+                puntos_utilizados = puntos_utilizados + 2
+            }
+
+            puntos_adicionales++;
+        }
+
+        if (estadistica_final == 30 && !estado ){
+            return
+        }
+
+        if (estado){
+            setAtributosNivel({...atributosNivel, [nombreStat]:bonus_final})
+            setSettings({...settings, "PuntosDisponiblesLegend":ptos_disponibles-puntos_utilizados});
+            return
+        }
+        setAtributosNivel({...atributosNivel, [nombreStat]:bonus_final})
+        setSettings({...settings, "BonusNivel":ptos_disponibles-puntos_utilizados});
+        return
+    }
+
+    else{
+
+        for (let i = bonus_inicial; i > bonus_final;i--){
+            if (estadistica_final - puntos_adicionales> 30){
+                puntos_utilizados = puntos_utilizados + 2;
+            }
+            else{
+                puntos_utilizados++;
+            }
+            puntos_adicionales++
+
+        }
+    if (estado){
+            setAtributosNivel({...atributosNivel, [nombreStat]:bonus_final});
+            setSettings({...settings, "PuntosDisponiblesLegend":ptos_disponibles+puntos_utilizados});
+            return
+    }
+    setAtributosNivel({...atributosNivel, [nombreStat]:bonus_final});
+    setSettings({...settings, "BonusNivel":ptos_disponibles+puntos_utilizados});
+    return
+}
 
 }
 

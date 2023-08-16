@@ -41,20 +41,33 @@ export function CharacterSettings(props:any){
         "Charisma":0,
         "Honor":0,
       }
+
+      let atributosLegendariosInicial: Personaje  = {
+        "Strenght":0,
+        "Dexterity":0,
+        "Constitution":0,
+        "Intelligence":0,
+        "Wisdom":0,
+        "Charisma":0,
+        "Honor":0,
+      }
   
       let atributosPrincipalesInicial: Atributos = {
         "AbilityScoreMaximo": 20,
         "Nivel": 0,
         "BonusNivel": 0,
         "PuntosDisponibles": 15,
+        "PuntosDisponiblesLegend":0,
       }
 
     let statName = props.stat_name as keyof Personaje;
+    let setEsLegendario = props.esLegendario;
     let [atributosIni,setAtributos] = props.arrayStats[0];
     let [atributosNivelIni,setAtributosNivel] = props.arrayStats[1];
     let [atributosFeatIni,setAtributosFeat] = props.arrayStats[2];
     let [atributosRazaIni,setAtributosRaza] = props.arrayStats[3];
     let [settingsIni,setSettings] = props.arrayStats[4];
+    let [atributosLegendariosIni, setAtributosLegendarios] = props.arrayStats[5];
 
     let settings:Atributos = settingsIni;
     let atributos:Personaje = atributosIni;
@@ -64,7 +77,15 @@ export function CharacterSettings(props:any){
 
     function actualizarBonusNivel(nivel: number){
         let puntos_utilizados = 0;
-        for (let i = 1; i < nivel; i++){
+        let nivelTrece = 13;
+        let mayorATrece = 0;
+        let puntosLegendarios = 0
+        if (nivel >= 14){
+          mayorATrece = nivel -13;
+        }else{
+          nivelTrece = nivel
+        }
+        for (let i = 1; i < nivelTrece ; i++){
   
           if (i >= 9){
   
@@ -74,8 +95,19 @@ export function CharacterSettings(props:any){
             puntos_utilizados++;
           }
         }
-        setSettings({...settings, "BonusNivel":puntos_utilizados,"Nivel": nivel})
+        if (nivel >= 14){
+          for (let i = 1; i <= mayorATrece; i++){
+            puntosLegendarios = puntosLegendarios + 2
+          }
+        }
+        setSettings({...settings, "BonusNivel":puntos_utilizados,"Nivel": nivel, 'PuntosDisponiblesLegend': puntosLegendarios})
         setAtributosNivel(atributosNivelInicial);
+        if (nivel >= 14){
+          setEsLegendario(true)
+        }
+        else{
+          setEsLegendario(false)
+        }
       }
 
       function resetElements(){
@@ -84,6 +116,7 @@ export function CharacterSettings(props:any){
         setAtributosNivel(atributosNivelInicial);
         setAtributosRaza(atributosRazaInicial);
         setSettings(atributosPrincipalesInicial);
+        setAtributosLegendarios(atributosLegendariosInicial);
       }
 
 

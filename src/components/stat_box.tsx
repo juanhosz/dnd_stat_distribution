@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import calcularPuntosOverflow, { BonusNivelFuncion, calcularPuntosAGastar, verificarSiUtilizanMasPuntos } from "../utils/statCalculatorModule";
+import calcularPuntosOverflow, { BonusNivelFuncion, BonusNivelFuncionLegendario, calcularPuntosAGastar, verificarSiUtilizanMasPuntos } from "../utils/statCalculatorModule";
 import rowStyle from "../styles/row.module.css"
 import {Atributos, Personaje} from "../types/types"
 
@@ -7,18 +7,21 @@ import {Atributos, Personaje} from "../types/types"
 export const StatBox = (props: any) =>{
     
     const nombreStat: string = props.stat_name;
+    let isDisabled = props.isDisabled
     let statName = props.stat_name as keyof Personaje;
     let [atributosIni,setAtributos] = props.arrayStats[0];
     let [atributosNivelIni,setAtributosNivel] = props.arrayStats[1];
     let [atributosFeatIni,setAtributosFeat] = props.arrayStats[2];
     let [atributosRazaIni,setAtributosRaza] = props.arrayStats[3];
     let [settingsIni,setSettings] = props.arrayStats[4];
+    let [atributosLegendarioIni, setAtributosLegendario] = props.arrayStats[5];
 
     let settings:Atributos = settingsIni;
     let atributos:Personaje = atributosIni;
     let atributosNivel:Personaje = atributosNivelIni;
     let atributosFeat:Personaje = atributosFeatIni;
     let atributosRaza:Personaje = atributosRazaIni;
+    let atributosLegendario:Personaje = atributosLegendarioIni;
 
     
     //const [statInicial,setStatInicial] = useState(10); //* Numero de los stats al distribuir
@@ -39,6 +42,7 @@ export const StatBox = (props: any) =>{
         let [puntosUtilizados,puntosAdicionales] = calcularPuntosAGastar(atributos[statName],statFinal,settings.AbilityScoreMaximo,settings.PuntosDisponibles,estadistica_final)
         setSettings({...settings, "PuntosDisponibles":ptos_disponibles + puntosUtilizados});
         setAtributos({...atributos, [nombreStat]: atributos[statName]+puntosAdicionales});
+
         return;
 
     }
@@ -78,8 +82,13 @@ export const StatBox = (props: any) =>{
     },[estadistica_final])
 
     function setBonusNivelFuncion(stat:any){
-        BonusNivelFuncion(stat,atributosNivel,settings,estadistica_final,setAtributosNivel,setSettings,statName,nombreStat,atributos);
+        BonusNivelFuncion(stat,atributosNivel,settings,estadistica_final,setAtributosNivel,setSettings,statName,nombreStat,atributos,false);
         return;
+    }
+
+    function setBonusNivelFuncionLegendario(stat:any){
+
+        BonusNivelFuncionLegendario(stat,atributosLegendario,settings,estadistica_final,setAtributosLegendario,setSettings,statName,nombreStat,atributos, true)
     }
 
     function setBonusRazaYFeat(stat:any,nombre:string){
@@ -120,11 +129,14 @@ export const StatBox = (props: any) =>{
         if (modificadorAbilidad >= 0) return true;
         return false;
     }
+
+
+
     useEffect(() =>{
-        setEstadisticaFinal(Number(atributos[statName]) + Number(atributosNivel[statName]) + Number(atributosRaza[statName]) + Number(atributosFeat[statName]));
+        setEstadisticaFinal(Number(atributos[statName]) + Number(atributosNivel[statName]) + Number(atributosRaza[statName]) + Number(atributosFeat[statName]) + Number(atributosLegendario[statName]));
 
         //calcular_modificador();
-    },[atributosNivel[statName],atributos[statName],atributosFeat[statName],atributosRaza[statName],statName]);// eslint-disable-line react-hooks/exhaustive-deps
+    },[atributosNivel[statName],atributos[statName],atributosFeat[statName],atributosRaza[statName],statName, atributosLegendario[statName]]);// eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() =>{
         calcular_modificador();
@@ -152,6 +164,14 @@ export const StatBox = (props: any) =>{
                     <input className = {rowStyle.inputBar} inputMode= "numeric" type="number" placeholder="Bonus de Nivel" min = {0} 
                         max = {atributosNivel[statName]+settings.BonusNivel} title = {"bonus de nivel"} 
                         value = {atributosNivel[statName].toString()} onChange = {e => setBonusNivelFuncion(Number(e.target.value))}> 
+                    </input>
+                </td>
+
+                <td>
+                    <input className = {rowStyle.inputBar} inputMode= "numeric" type="number" placeholder="Bonus de Nivel" min = {0} 
+                        max = {atributosLegendario[statName]+settings.PuntosDisponiblesLegend} title = {"bonus de nivel"} 
+                        value = {atributosLegendario[statName].toString()} onChange = {e => setBonusNivelFuncionLegendario(Number(e.target.value))}
+                        disabled = {!isDisabled}> 
                     </input>
                 </td>
 
