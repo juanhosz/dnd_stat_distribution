@@ -59,12 +59,13 @@ export const StatBox = (props: any) =>{
             return;
         }
         if (estadistica_final_legendaria > 35){
-            let stat = estadistica_final_legendaria -35;
+            let stat = estadistica_final_legendaria -34;
+            console.log(stat)
             let suma = 0;
             for (let i = 0; i < stat; i++){
                 suma++;
             }
-            setModificador(14+ Math.floor(stat/2));
+            setModificador(14+ Math.floor(suma/2));
             return
         }
         if(estadistica_final_legendaria === 10){
