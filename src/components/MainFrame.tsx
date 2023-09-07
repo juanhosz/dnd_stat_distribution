@@ -132,7 +132,7 @@ export const MainFrame = () =>{
       <div className={tableStyle.body_container}>
         <CharacterSettings arrayStats = {constArray} esLegendario = {setEsLegendario}></CharacterSettings>
         <div>
-          <div>Puntos Disponibles = {settings.PuntosDisponibles} ; Puntos de Nivel Disponibles = {settings.BonusNivel}; Puntos De Nivel Legendario Disponibles = {settings.PuntosDisponiblesLegend}</div>
+          <div>Puntos Disponibles = {settings.PuntosDisponibles} ; Puntos de Nivel Disponibles = {settings.BonusNivel}; Puntos De Nivel {">= 14"} Disponibles = {settings.PuntosDisponiblesLegend}</div>
           <table id = {"table-id"} className={tableStyle.table_format}>
             <thead>
               <tr>
@@ -153,10 +153,9 @@ export const MainFrame = () =>{
               </StatBox>)}
             </tbody>
           </table>
-        <div>{"REGLAS DEL MANDATO: A MENOS QUE SEA UN FEAT HEROICO, EVITEN PONER PUNTOS DE FEATS QUE SUBAN A MAS DE 30 "}
+        <div>
         {"(RECUERDEN QUE A PARTIR DE 30 (es decir de 30 a 31) CUESTA DOS PUNTOS E.G: COMBAT MASTER DA +2 DEX, SE SUBEN SOLO UN PUNTO EN LA COLUMNA DE FEATS SI TIENEN 30 O MAS) si hay algun feat que da un punto y estan en 30 o mas, mala suerte, tienen 30.5 redondeado para abajo"}</div>
-        {"15/8/2023: FAVOR DE APRETAR EL BOTON DE RESETEAR DATOS"}
-        <div style={{'color':'red'}}>{"ORDEN: INICIAL > RAZA > FEATS PENES > PUNTOS DE NIVEL > NIVEL (>14) > FEATS HEROICOS"}</div>
+        <div style={{'color':'red'}}>{"ORDEN: INICIAL > RAZA > PUNTOS DE NIVEL > FEATS PENES > NIVEL (>14) > FEATS HEROICOS"}</div>
         <div style = {{'color': 'red'}}>{"TO DO: Agregar lista de feats y permitir mas de 35 de ability score"}</div>
         </div>
         <div className={tableStyle.PreviewContainer}>

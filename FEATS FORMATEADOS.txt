@@ -1,0 +1,111 @@
+Opportunist, DEX or STR, 1
+Acute, INT or WIS or HNR, 1
+Dervish, dex, 1
+Executioner
+Defensive Fighter, DEX or STR, 1
+Diehard, STR or DEX or CON or INT or WIS or CHA or HNR,1
+Field Medic, WIS, 1
+Critical Magic
+Metamagician, STR or DEX or CON or INT or WIS or CHA or HNR,1
+Metamagic Reservoir
+One Step Ahead
+Scholar, INT and WIS, 1
+Academic Savant, INT and WIS, 1
+Thesis Spell
+Spell Warfare, INT or WIS or CHA or HNR,1
+Magic Specialist
+Spellshooter
+Reactive
+Moment of Clarity
+Premonition, WIS, 1
+Heroic Presence, CHA or HNR, 1
+Defender
+Shield Master
+Sprinter, DEX, 1
+Deathbound, STR or DEX, 2
+Cruel Fate
+Professional, STR or DEX or CON or INT or WIS or CHA or HNR,1
+Veteran, STR or DEX or HNR, 2
+Volent Past, STR or DEX or HNR, 1
+Scion of Greatness
+Thrill of the hunt, STR or DEX, 1
+Sixth Sense, INT or WIS,1
+Craftsman, STR, 1
+Master Alchemist, INT,1
+Devil Within
+Darkness Within
+Scavenger, STR or DEX or CON,1
+Undertow, STR or DEX,1
+Navigator, INT, 1
+Night Terrors, WIS or HNR, 1
+Against all ods
+Undeath, STR or DEX or CON or INT or WIS or CHA or HNR,2
+Cynic, INT or WIS or HNR, 1
+Nightingale, DEX, 1
+Achilles Heel, CON, 1
+Negotiator, CHA, 1
+Streak Fighter
+Stoneheart
+Artist, DEX,1
+Artist of Kings, DEX, 1
+Stalwart
+Rapturous, STR or DEX, 1
+Cleave Master, STR, 1
+Ki Sensitive
+Optimist, CHA, 1
+Perfectionist, INT, 1
+Quick Witted
+Dirty Fighter, STR, 1
+Cook, STR or DEX or CON or INT or WIS or CHA or HNR,1
+Master Cook,STR or DEX or CON or INT or WIS or CHA or HNR,1
+Head-Chef, STR or DEX or CON or INT or WIS or CHA or HNR,1
+Thesis Spell Variant
+Titanblood, CON, 1
+No Mither, CON,1 
+Fast Agent, DEX, 1
+Scion of Faith
+Armor of Contempt
+Altruist, HNR, 1
+Zealot
+Heroic Intervention
+Combat Doctrine
+Military Doctrine
+One with Nature, WIS, 1
+Nerves of steel, INT or WIS or CHA or HNR,1 
+Misfit, CHA or HNR,1, CON,1
+Pattern Recognition
+Astral Connection
+Astral Path
+Edge Dancer
+Heroic Feats
+Though (Heroic)
+Sharpshooter (Heroic)
+Astral Path (Heroic)
+Warcaster (Heroic)
+Edgedancer (Heroic), DEX, 2
+Diehard (Heroic), CON, 2
+Sentinel (Heroic), STR or DEX or CON or INT or WIS or CHA or HNR,2
+Lucky (Heroic)
+Alert (Heroic), WIS ,2
+Dirty Fighter(Heroic), STR or DEX, 2
+Combat Master, STR or DEX,2
+Tenkai
+Lightness
+Stoneheart (Heroic)
+Legendary Warrior
+Mad Enhancment
+Feel No Pain
+Unbreakable Will
+Celerity
+Anatomical Control
+Arcane Prowess
+Absolute Precision
+Innate Inspiration
+Inscrutable Will
+Legendary Warrior (Heroic)
+Controlled Enhancment
+Unyielding
+Limitless
+Magic Exemplar
+Killer Instinct
+
