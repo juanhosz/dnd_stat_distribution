@@ -15,6 +15,7 @@ export const StatBox = (props: any) =>{
     let [atributosRazaIni,setAtributosRaza] = props.arrayStats[3];
     let [settingsIni,setSettings] = props.arrayStats[4];
     let [atributosLegendarioIni, setAtributosLegendario] = props.arrayStats[5];
+    let [atributosFeatLegendarioIni,setAtributosFeatLegendario] = props.arrayStats[6];
 
     let settings:Atributos = settingsIni;
     let atributos:Personaje = atributosIni;
@@ -22,10 +23,12 @@ export const StatBox = (props: any) =>{
     let atributosFeat:Personaje = atributosFeatIni;
     let atributosRaza:Personaje = atributosRazaIni;
     let atributosLegendario:Personaje = atributosLegendarioIni;
+    let atributosFeatLegendario:Personaje = atributosFeatLegendarioIni;
 
     
     //const [statInicial,setStatInicial] = useState(10); //* Numero de los stats al distribuir
     const [estadistica_final,setEstadisticaFinal] = useState(atributos[statName] + atributosFeat[statName] + atributosNivel[statName]+ atributosRaza[statName]); //* Numero que indica el ability score final
+    const [estadistica_final_legendaria, set_estadistica_legendaria] =useState(atributos[statName] + atributosFeat[statName] + atributosNivel[statName]+ atributosRaza[statName] + atributosFeatLegendario[statName]);
     //const [bonus_raza, setBonusRaza] = useState(0); //* Numero que indical los puntos que otorga la raza
     //const [bonus_nivel, setBonusNivel] = useState(0); //* Numero que indica los puntos que se agregaron por el nivel
     const [modificadorAbilidad,setModificador] = useState(0);
@@ -51,12 +54,12 @@ export const StatBox = (props: any) =>{
 
     const calcular_modificador = useCallback(() =>{
         let puntos = 0;
-        if (estadistica_final === 35){
+        if (estadistica_final_legendaria === 35){
                 setModificador(14);
             return;
         }
-        if (estadistica_final > 35){
-            let stat = estadistica_final -35;
+        if (estadistica_final_legendaria > 35){
+            let stat = estadistica_final_legendaria -35;
             let suma = 0;
             for (let i = 0; i < stat; i++){
                 suma++;
@@ -64,24 +67,24 @@ export const StatBox = (props: any) =>{
             setModificador(14+ Math.floor(stat/2));
             return
         }
-        if(estadistica_final === 10){
+        if(estadistica_final_legendaria === 10){
             setModificador(0);
             return;
         }
-        if (estadistica_final > 10){
-            for (let i =0; i < estadistica_final; i++){
+        if (estadistica_final_legendaria > 10){
+            for (let i =0; i < estadistica_final_legendaria; i++){
                 if (i >= 10){
                     puntos++;
                 }
             }
         }
         else{
-            for (let i = 10; i> estadistica_final; i--){
+            for (let i = 10; i> estadistica_final_legendaria; i--){
                 puntos--;
             }
         }
         setModificador(Math.floor(puntos/2));
-    },[estadistica_final])
+    },[estadistica_final,estadistica_final_legendaria])
 
     function setBonusNivelFuncion(stat:any){
         BonusNivelFuncion(stat,atributosNivel,settings,estadistica_final,setAtributosNivel,setSettings,statName,nombreStat,atributos,false);
@@ -90,12 +93,15 @@ export const StatBox = (props: any) =>{
 
     function setBonusNivelFuncionLegendario(stat:any){
 
-        BonusNivelFuncionLegendario(stat,atributosLegendario,settings,estadistica_final,setAtributosLegendario,setSettings,statName,nombreStat,atributos, true)
+        BonusNivelFuncionLegendario(stat,atributosLegendario,settings,estadistica_final_legendaria,setAtributosLegendario,setSettings,statName,nombreStat,atributos, true)
     }
 
     function setBonusRazaYFeat(stat:any,nombre:string){
         let statInicial;
         let statFinal = Number(stat);
+        if (nombre === "FEAT LEGENDARIO"){
+            statInicial = atributosFeatLegendario[statName];
+        }
         if (nombre === "FEAT"){
             statInicial = atributosFeat[statName]
         }
@@ -117,6 +123,10 @@ export const StatBox = (props: any) =>{
                 suma--;
             }
         }
+        if (nombre === "FEAT LEGENDARIO"){
+            setAtributosFeatLegendario({...atributosFeatLegendario, [nombreStat]:Number(statInicial+suma)});
+            return;
+        }
         if (nombre === "FEAT"){
             setAtributosFeat({...atributosFeat, [nombreStat]:Number(statInicial+suma)})
             return;
@@ -135,14 +145,15 @@ export const StatBox = (props: any) =>{
 
 
     useEffect(() =>{
-        setEstadisticaFinal(Number(atributos[statName]) + Number(atributosNivel[statName]) + Number(atributosRaza[statName]) + Number(atributosFeat[statName]) + Number(atributosLegendario[statName]));
+        setEstadisticaFinal(Number(atributos[statName]) + Number(atributosNivel[statName]) + Number(atributosRaza[statName]) + Number(atributosFeat[statName]));
+        set_estadistica_legendaria(Number(atributos[statName]) + Number(atributosNivel[statName]) + Number(atributosRaza[statName]) + Number(atributosFeat[statName]) + atributosFeatLegendario[statName] + atributosLegendario[statName]);
 
         //calcular_modificador();
-    },[atributosNivel[statName],atributos[statName],atributosFeat[statName],atributosRaza[statName],statName, atributosLegendario[statName]]);// eslint-disable-line react-hooks/exhaustive-deps
+    },[atributosNivel[statName],atributos[statName],atributosFeat[statName],atributosRaza[statName],statName, atributosLegendario[statName], atributosFeatLegendario[statName]]);// eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() =>{
         calcular_modificador();
-    },[estadistica_final, calcular_modificador]);
+    },[estadistica_final, calcular_modificador, estadistica_final_legendaria]);
 
     return(
             <tr id = {nombreStat}>
@@ -170,15 +181,23 @@ export const StatBox = (props: any) =>{
                 </td>
 
                 <td>
-                    <input className = {rowStyle.inputBar} inputMode= "numeric" type="number" placeholder="Bonus de Nivel" min = {0} 
-                        max = {atributosLegendario[statName]+settings.PuntosDisponiblesLegend} title = {"bonus de nivel"} 
+                    <input className = {rowStyle.inputBar} inputMode= "numeric" type="number" placeholder="Bonus de Nivel Legendario" min = {0} 
+                        max = {atributosLegendario[statName]+settings.PuntosDisponiblesLegend} title = {"bonus de nivel Legendario"} 
                         value = {atributosLegendario[statName].toString()} onChange = {e => setBonusNivelFuncionLegendario(Number(e.target.value))}
                         disabled = {!isDisabled}> 
                     </input>
                 </td>
 
                 <td>
-                <div className="caracteristica_total"> = {estadistica_final}  </div>
+                    <input className = {rowStyle.inputBar} inputMode= "numeric" type="number" placeholder="Bonus de feat legendario" min = {0} 
+                        title = {"bonus de feat Legendario"} 
+                        value = {atributosFeatLegendario[statName].toString()} onChange = {e => setBonusRazaYFeat(e.target.value,"FEAT LEGENDARIO")}
+                        disabled = {!isDisabled}> 
+                    </input>
+                </td>
+
+                <td>
+                <div className="caracteristica_total"> = {estadistica_final_legendaria}  </div>
                 </td>
 
                 {modificador_positivo()&& <td className={rowStyle.box_modificador} style={{'color':'green'}}> + {modificadorAbilidad}</td>}

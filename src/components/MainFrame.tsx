@@ -54,6 +54,7 @@ export const MainFrame = () =>{
       "BonusNivel": 0,
       "PuntosDisponibles": 15,
       "PuntosDisponiblesLegend": 0,
+      "PuntosMaximosLegendario": 0
     }
 
     let atributosLegendarioInicial: Personaje = {
@@ -66,6 +67,17 @@ export const MainFrame = () =>{
       "Honor":0,
     }
 
+    let atributosFeatLegendarioInicial: Personaje = {
+      "Strenght":0,
+      "Dexterity":0,
+      "Constitution":0,
+      "Intelligence":0,
+      "Wisdom":0,
+      "Charisma":0,
+      "Honor":0,
+    }
+
+
     let atributosCache = window.localStorage.getItem("ATRIBUTOS")
     if (atributosCache){
       var atributosParse = JSON.parse(atributosCache);
@@ -74,13 +86,16 @@ export const MainFrame = () =>{
       atributosParse = false;
     }
     const [esLegendario, setEsLegendario] = useState(false)
+
     const [atributos, setAtributos] = useState(parser(atributosParse.atributos,atributosInicial));
     const [atributosNivel, setAtributosNivel] = useState(parser(atributosParse.atributosNivel,atributosNivelInicial));
     const [atributosLegendario, setAtributosLegendario] = useState(parser(atributosParse.atributosLegendario,atributosLegendarioInicial));
     const [atributosFeat, setAtributosFeat] = useState(parser(atributosParse.atributosFeat,atributosFeatInicial));
+    const [atributosFeatLegendario,setAtributosFeatLegendario] = useState(parser(atributosParse.atributosFeatLegendario,atributosFeatLegendarioInicial));
     const [atributosRaza, setAtributosRaza] = useState(parser(atributosParse.atributosRaza,atributosRazaInicial));
     const [settings,setSettings] = useState(parser(atributosParse.settings,atributosPrincipalesInicial));
-    const [disablePoints, setDisablePoints] = useState(false)
+    const [disablePoints, setDisablePoints] = useState(atributosParse.isDisabled);
+    
 
 
     function parser(state:any,other:any){
@@ -95,7 +110,8 @@ export const MainFrame = () =>{
     [atributosFeat, setAtributosFeat],
     [atributosRaza,setAtributosRaza],
     [settings,setSettings],
-    [atributosLegendario,setAtributosLegendario]];
+    [atributosLegendario,setAtributosLegendario],
+    [atributosFeatLegendario, setAtributosFeatLegendario]];
 
     function actualizarAbilityScoreMaximo(){
       if (settings.Nivel <= 5 && settings.Nivel < 14){
@@ -115,7 +131,7 @@ export const MainFrame = () =>{
     },[settings.Nivel]); 
 
     useEffect(() =>{
-      setDisablePoints(settings.BonusNivel == 0)
+      setDisablePoints(settings.BonusNivel == 0);
     },[settings.BonusNivel])
 
     useEffect(() =>{
@@ -124,15 +140,21 @@ export const MainFrame = () =>{
                                   "atributosFeat":atributosFeat,
                                   "atributosRaza":atributosRaza,
                                   "settings":settings,
-                                "atributosLegendario":atributosLegendario}));
+                                "atributosLegendario":atributosLegendario,
+                              "atributsoFeatLegendario":atributosFeatLegendario,
+                            "isDisabled":disablePoints}));
 
-    },[atributos,settings,atributosNivel,atributosFeat,atributosRaza])
+    },[atributos,settings,atributosNivel,atributosFeat,atributosRaza,disablePoints])
 
     return (
       <div className={tableStyle.body_container}>
         <CharacterSettings arrayStats = {constArray} esLegendario = {setEsLegendario}></CharacterSettings>
         <div>
-          <div>Puntos Disponibles = {settings.PuntosDisponibles} ; Puntos de Nivel Disponibles = {settings.BonusNivel}; Puntos De Nivel {">= 14"} Disponibles = {settings.PuntosDisponiblesLegend}</div>
+          <div className={tableStyle.stats_info}>
+            <div>Puntos Disponibles = {settings.PuntosDisponibles} </div>
+            <div>Puntos de Nivel Disponibles = {settings.BonusNivel}</div> 
+            <div>Puntos De Nivel {">= 14"} Disponibles = {settings.PuntosDisponiblesLegend}</div>
+          </div>
           <table id = {"table-id"} className={tableStyle.table_format}>
             <thead>
               <tr>
@@ -143,6 +165,7 @@ export const MainFrame = () =>{
                 <th>Puntos de Nivel</th>
                 <th>Nivel 
                   {"(>= 14)"}</th>
+                <th>Feat {">=14"}</th>
                 <th>Ability Score</th>
                 <th>Ability Modifier</th>
               </tr>

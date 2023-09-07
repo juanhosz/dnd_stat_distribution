@@ -58,6 +58,7 @@ export function CharacterSettings(props:any){
         "BonusNivel": 0,
         "PuntosDisponibles": 15,
         "PuntosDisponiblesLegend":0,
+        "PuntosMaximosLegendario": 0
       }
 
     let statName = props.stat_name as keyof Personaje;
@@ -100,7 +101,7 @@ export function CharacterSettings(props:any){
             puntosLegendarios = puntosLegendarios + 2
           }
         }
-        setSettings({...settings, "BonusNivel":puntos_utilizados,"Nivel": nivel, 'PuntosDisponiblesLegend': puntosLegendarios})
+        setSettings({...settings, "BonusNivel":puntos_utilizados,"Nivel": nivel, 'PuntosDisponiblesLegend': puntosLegendarios,'PuntosMaximosLegendario': puntosLegendarios})
         setAtributosNivel(atributosNivelInicial);
         setAtributosLegendarios(atributosLegendariosInicial);
         if (nivel >= 14){

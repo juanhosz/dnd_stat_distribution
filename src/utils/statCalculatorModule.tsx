@@ -195,7 +195,6 @@ export  function BonusNivelFuncionLegendario(stat:any,
     let puntos_adicionales = 0;
     if (bonus_final > bonus_inicial && estado){
         if (ptos_disponibles === 0){
-            setAtributosNivel({...atributosNivel, [nombreStat]:bonus_inicial});
             return
         }
 
@@ -204,13 +203,13 @@ export  function BonusNivelFuncionLegendario(stat:any,
                 break;
             }
             if (estadistica_final + puntos_adicionales < 30){
-                console.log("asd")
                 puntos_utilizados ++;
             }
             if (estadistica_final + puntos_adicionales + 1 > 35){
                 break
             }
             if (puntos_utilizados > ptos_disponibles){
+                puntos_utilizados--;
                 break
             }
             if (estadistica_final + puntos_adicionales ==35){
@@ -224,6 +223,7 @@ export  function BonusNivelFuncionLegendario(stat:any,
                     
                     break
                 }
+
                 puntos_utilizados = puntos_utilizados + 2
             }
 
